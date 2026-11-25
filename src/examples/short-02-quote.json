@@ -1,0 +1,1801 @@
+{
+  "meta": {
+    "title": "Citation — La constance",
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "background": "#060306",
+    "safeArea": {
+      "top": 220,
+      "bottom": 320,
+      "left": 0,
+      "right": 110
+    },
+    "grain": 0.09
+  },
+  "theme": {
+    "palette": {
+      "primary": "#ffb36b",
+      "accent": "#ff6f61",
+      "rose": "#ff9ec4",
+      "plum": "#6b2d5c",
+      "text": "#fff4ea",
+      "background": "#120710"
+    },
+    "fonts": [
+      "Instrument Serif",
+      "Inter"
+    ]
+  },
+  "assets": {
+    "logo": "./assets/logo-lumen.svg"
+  },
+  "scenes": [
+    {
+      "id": "backdrop",
+      "duration": 40,
+      "layers": [
+        {
+          "type": "group",
+          "id": "atmosphere",
+          "keyframes": [
+            {
+              "t": 38.8,
+              "opacity": 1
+            },
+            {
+              "t": 40,
+              "opacity": 0,
+              "easing": "ease-in"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "sky",
+              "shape": {
+                "type": "rect",
+                "x": 0,
+                "y": 0,
+                "width": 1080,
+                "height": 1920
+              },
+              "keyframes": [
+                {
+                  "t": 0,
+                  "fill": {
+                    "type": "linear",
+                    "angle": 170,
+                    "stops": [
+                      [
+                        "#2a0f2e",
+                        0
+                      ],
+                      [
+                        "#14081a",
+                        0.55
+                      ],
+                      [
+                        "#0d0610",
+                        1
+                      ]
+                    ]
+                  }
+                },
+                {
+                  "t": 10,
+                  "fill": {
+                    "type": "linear",
+                    "angle": 190,
+                    "stops": [
+                      [
+                        "#3b1236",
+                        0
+                      ],
+                      [
+                        "#1a0a1e",
+                        0.55
+                      ],
+                      [
+                        "#120710",
+                        1
+                      ]
+                    ]
+                  },
+                  "easing": "linear"
+                },
+                {
+                  "t": 22,
+                  "fill": {
+                    "type": "linear",
+                    "angle": 210,
+                    "stops": [
+                      [
+                        "#4a1a2c",
+                        0
+                      ],
+                      [
+                        "#22102a",
+                        0.55
+                      ],
+                      [
+                        "#0f0712",
+                        1
+                      ]
+                    ]
+                  },
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 34,
+                  "fill": {
+                    "type": "linear",
+                    "angle": 180,
+                    "stops": [
+                      [
+                        "#2c1640",
+                        0
+                      ],
+                      [
+                        "#140a22",
+                        0.55
+                      ],
+                      [
+                        "#0a0610",
+                        1
+                      ]
+                    ]
+                  },
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 40,
+                  "fill": {
+                    "type": "linear",
+                    "angle": 160,
+                    "stops": [
+                      [
+                        "#1a0b1e",
+                        0
+                      ],
+                      [
+                        "#0d0610",
+                        0.55
+                      ],
+                      [
+                        "#060306",
+                        1
+                      ]
+                    ]
+                  },
+                  "easing": "linear"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "sun",
+              "shape": {
+                "type": "circle",
+                "cx": 760,
+                "cy": 520,
+                "r": 640
+              },
+              "fill": {
+                "type": "radial",
+                "stops": [
+                  [
+                    "rgba(255,111,97,0.85)",
+                    0
+                  ],
+                  [
+                    "rgba(255,111,97,0.3)",
+                    0.45
+                  ],
+                  [
+                    "rgba(255,111,97,0)",
+                    1
+                  ]
+                ]
+              },
+              "blend": "screen",
+              "pivot": "center",
+              "opacity": 0.75,
+              "keyframes": [
+                {
+                  "t": 0,
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "t": 0,
+                  "scale": 1
+                },
+                {
+                  "t": 20,
+                  "scale": 1.14,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 40,
+                  "x": -200,
+                  "y": 160,
+                  "easing": "linear"
+                },
+                {
+                  "t": 40,
+                  "scale": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "dusk",
+              "shape": {
+                "type": "circle",
+                "cx": 220,
+                "cy": 1380,
+                "r": 620
+              },
+              "fill": {
+                "type": "radial",
+                "stops": [
+                  [
+                    "rgba(107,45,92,0.85)",
+                    0
+                  ],
+                  [
+                    "rgba(107,45,92,0.3)",
+                    0.45
+                  ],
+                  [
+                    "rgba(107,45,92,0)",
+                    1
+                  ]
+                ]
+              },
+              "blend": "screen",
+              "pivot": "center",
+              "opacity": 0.9,
+              "keyframes": [
+                {
+                  "t": 0,
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "t": 0,
+                  "scale": 1
+                },
+                {
+                  "t": 20,
+                  "scale": 1.14,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 40,
+                  "x": 160,
+                  "y": -220,
+                  "easing": "linear"
+                },
+                {
+                  "t": 40,
+                  "scale": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "glow",
+              "shape": {
+                "type": "circle",
+                "cx": 540,
+                "cy": 1700,
+                "r": 520
+              },
+              "fill": {
+                "type": "radial",
+                "stops": [
+                  [
+                    "rgba(255,179,107,0.85)",
+                    0
+                  ],
+                  [
+                    "rgba(255,179,107,0.3)",
+                    0.45
+                  ],
+                  [
+                    "rgba(255,179,107,0)",
+                    1
+                  ]
+                ]
+              },
+              "blend": "screen",
+              "pivot": "center",
+              "opacity": 0.5,
+              "keyframes": [
+                {
+                  "t": 0,
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "t": 0,
+                  "scale": 1
+                },
+                {
+                  "t": 20,
+                  "scale": 1.14,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 40,
+                  "x": 0,
+                  "y": -300,
+                  "easing": "linear"
+                },
+                {
+                  "t": 40,
+                  "scale": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "group",
+              "id": "dust",
+              "layers": [
+                {
+                  "type": "path",
+                  "id": "dust-0",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 289.2296062409878,
+                    "cy": 1505.8111094031483,
+                    "r": 4.449966665357351
+                  },
+                  "fill": "rgba(255,179,107,0.86)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -169.86823504790664,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-1",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 881.5522145479918,
+                    "cy": 776.5004061162472,
+                    "r": 2.212425365112722
+                  },
+                  "fill": "rgba(255,179,107,0.43)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -356.7874002177268,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-2",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 993.892830312252,
+                    "cy": 1001.2510384898633,
+                    "r": 3.8074304964393377
+                  },
+                  "fill": "rgba(255,179,107,0.67)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -281.00719921290874,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-3",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 806.3206151872873,
+                    "cy": 1329.3523258902133,
+                    "r": 3.672309488989413
+                  },
+                  "fill": "rgba(255,179,107,0.64)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -330.42869604192674,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-4",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 407.96535685658455,
+                    "cy": 935.5895704496652,
+                    "r": 2.3677650094032288
+                  },
+                  "fill": "rgba(255,179,107,0.77)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -326.8402844108641,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-5",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 403.788423165679,
+                    "cy": 536.080770380795,
+                    "r": 5.927053990773857
+                  },
+                  "fill": "rgba(255,179,107,0.46)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -250.9555843565613,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-6",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 498.0705589056015,
+                    "cy": 442.5704503711313,
+                    "r": 2.456102216616273
+                  },
+                  "fill": "rgba(255,179,107,0.71)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -314.56575881689787,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-7",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 141.1597991734743,
+                    "cy": 1099.3486617319286,
+                    "r": 5.705391098745167
+                  },
+                  "fill": "rgba(255,179,107,0.53)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -278.10241560451686,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-8",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 398.6289744079113,
+                    "cy": 712.8459259215742,
+                    "r": 4.049861613661051
+                  },
+                  "fill": "rgba(255,179,107,0.76)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -221.9513581506908,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-9",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 211.8689911812544,
+                    "cy": 1453.8604431599379,
+                    "r": 4.502304605208337
+                  },
+                  "fill": "rgba(255,179,107,0.59)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -359.27105312235653,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-10",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 525.178008377552,
+                    "cy": 535.1523607503623,
+                    "r": 3.014811275526881
+                  },
+                  "fill": "rgba(255,179,107,0.86)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -277.59742349386215,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-11",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 533.0626342445612,
+                    "cy": 530.8503754623234,
+                    "r": 3.7358368122950196
+                  },
+                  "fill": "rgba(255,179,107,0.49)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -160.40894015692174,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-12",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 723.975814729929,
+                    "cy": 1303.2530598063022,
+                    "r": 2.5787388160824776
+                  },
+                  "fill": "rgba(255,179,107,0.67)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -308.378383833915,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-13",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 907.5107612460852,
+                    "cy": 790.1715415343642,
+                    "r": 3.6266127629205585
+                  },
+                  "fill": "rgba(255,179,107,0.72)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -325.7232264522463,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-14",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 543.4752953052521,
+                    "cy": 935.9969393815845,
+                    "r": 5.142829867079854
+                  },
+                  "fill": "rgba(255,179,107,0.88)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -224.88777864724398,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-15",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 909.4387120753527,
+                    "cy": 573.4084104560316,
+                    "r": 3.1091637881472707
+                  },
+                  "fill": "rgba(255,179,107,0.87)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -302.974118469283,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-16",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 260.4416535794735,
+                    "cy": 368.81823719479144,
+                    "r": 3.1753829829394817
+                  },
+                  "fill": "rgba(255,179,107,0.81)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -312.00107833370566,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-17",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 262.2096287459135,
+                    "cy": 972.2561252117157,
+                    "r": 5.025538652203977
+                  },
+                  "fill": "rgba(255,179,107,0.61)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -225.97342980094254,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-18",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 398.17444056272507,
+                    "cy": 571.291520325467,
+                    "r": 5.483271127566695
+                  },
+                  "fill": "rgba(255,179,107,0.5)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -295.77212281525135,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-19",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 731.7247239500284,
+                    "cy": 881.2924906052649,
+                    "r": 3.0743468264117837
+                  },
+                  "fill": "rgba(255,179,107,0.66)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -227.3596208449453,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-20",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 156.4825303852558,
+                    "cy": 809.45781131275,
+                    "r": 3.8635911494493484
+                  },
+                  "fill": "rgba(255,179,107,0.78)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -332.29306111112237,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-21",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 802.8460105508566,
+                    "cy": 605.713950432837,
+                    "r": 4.742284673266113
+                  },
+                  "fill": "rgba(255,179,107,0.69)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -175.22842929698527,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-22",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 772.7479630708694,
+                    "cy": 1386.0517152305692,
+                    "r": 4.251223901286721
+                  },
+                  "fill": "rgba(255,179,107,0.83)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -171.3742372021079,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-23",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 777.0836795121431,
+                    "cy": 875.1146554760635,
+                    "r": 5.9803515719249845
+                  },
+                  "fill": "rgba(255,179,107,0.86)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -199.26850552670658,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-24",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 330.60209199786186,
+                    "cy": 1418.9859930519015,
+                    "r": 5.247558910399675
+                  },
+                  "fill": "rgba(255,179,107,0.89)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -350.4395299963653,
+                      "easing": "linear"
+                    }
+                  ]
+                },
+                {
+                  "type": "path",
+                  "id": "dust-25",
+                  "shape": {
+                    "type": "circle",
+                    "cx": 88.22781376540661,
+                    "cy": 1466.458036378026,
+                    "r": 2.9533692663535476
+                  },
+                  "fill": "rgba(255,179,107,0.89)",
+                  "keyframes": [
+                    {
+                      "t": 0,
+                      "y": 0,
+                      "opacity": 0
+                    },
+                    {
+                      "t": 0.8,
+                      "opacity": 1,
+                      "easing": "ease-out"
+                    },
+                    {
+                      "t": 40,
+                      "y": -208.18427939899266,
+                      "easing": "linear"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "vignette",
+              "shape": {
+                "type": "rect",
+                "x": 0,
+                "y": 0,
+                "width": 1080,
+                "height": 1920
+              },
+              "fill": {
+                "type": "radial",
+                "center": {
+                  "x": 540,
+                  "y": 883.2
+                },
+                "radius": 1382.3999999999999,
+                "stops": [
+                  [
+                    "rgba(0,0,0,0)",
+                    0.45
+                  ],
+                  [
+                    "rgba(0,0,0,0.6)",
+                    1
+                  ]
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "start": 0
+    },
+    {
+      "id": "intro",
+      "duration": 6.5,
+      "layers": [
+        {
+          "type": "path",
+          "id": "horizon-sun",
+          "shape": {
+            "type": "circle",
+            "cx": 540,
+            "cy": 760,
+            "r": 150
+          },
+          "fill": {
+            "type": "linear",
+            "angle": 180,
+            "stops": [
+              [
+                "#ffb36b",
+                0
+              ],
+              [
+                "#ff6f61",
+                1
+              ]
+            ]
+          },
+          "shadow": {
+            "color": "rgba(255,111,97,0.8)",
+            "blur": 90
+          },
+          "pivot": "center",
+          "keyframes": [
+            {
+              "t": 0,
+              "y": 260,
+              "opacity": 0
+            },
+            {
+              "t": 1.6,
+              "y": 0,
+              "opacity": 1,
+              "easing": "cubic-bezier(0.22,1,0.36,1)"
+            },
+            {
+              "t": 5.6,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 6,
+              "opacity": 0,
+              "y": -80,
+              "easing": "ease-in"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "horizon-line",
+          "d": "M120,930 H960",
+          "stroke": {
+            "type": "linear",
+            "angle": 90,
+            "stops": [
+              [
+                "rgba(255,244,234,0)",
+                0
+              ],
+              [
+                "rgba(255,244,234,0.7)",
+                0.5
+              ],
+              [
+                "rgba(255,244,234,0)",
+                1
+              ]
+            ]
+          },
+          "strokeWidth": 2,
+          "pathLength": 1,
+          "keyframes": [
+            {
+              "t": 0.4,
+              "strokeDashoffset": 1
+            },
+            {
+              "t": 1.6,
+              "strokeDashoffset": 0,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "ref": "title-card",
+          "start": 0.8,
+          "props": {
+            "kicker": "Pensée du jour",
+            "title": "Une phrase\npour *ta journée*.",
+            "subtitle": "Lis-la jusqu’au bout.",
+            "style": "mask",
+            "font": "Instrument Serif",
+            "weight": 400,
+            "size": 128,
+            "y": 1180,
+            "accent": "$accent",
+            "accent2": "$primary",
+            "exit": 4.8
+          }
+        }
+      ],
+      "start": 0,
+      "transitionOut": {
+        "type": "fade",
+        "duration": 0.5,
+        "easing": "ease-in-out"
+      }
+    },
+    {
+      "id": "citation",
+      "duration": 20,
+      "layers": [
+        {
+          "type": "text",
+          "id": "quote-mark",
+          "content": "“",
+          "font": "Instrument Serif",
+          "size": 420,
+          "weight": 400,
+          "color": {
+            "type": "linear",
+            "angle": 180,
+            "stops": [
+              [
+                "#ffb36b",
+                0
+              ],
+              [
+                "#ff6f61",
+                1
+              ]
+            ]
+          },
+          "anchor": {
+            "x": 540,
+            "y": 560
+          },
+          "pivot": {
+            "x": 0,
+            "y": -60
+          },
+          "keyframes": [
+            {
+              "t": 0.3,
+              "scale": 0.4,
+              "opacity": 0,
+              "rotate": -12
+            },
+            {
+              "t": 1.3,
+              "scale": 1,
+              "opacity": 1,
+              "rotate": 0,
+              "easing": "spring(140,11)"
+            },
+            {
+              "t": 18.6,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 19,
+              "opacity": 0,
+              "y": -40,
+              "easing": "ease-in"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "quote",
+          "keyframes": [
+            {
+              "t": 18.6,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 19,
+              "opacity": 0,
+              "y": -50,
+              "easing": "ease-in"
+            }
+          ],
+          "layers": [
+            {
+              "type": "text",
+              "id": "line-a",
+              "content": "Le talent attire\nle regard.",
+              "font": "Instrument Serif",
+              "size": 112,
+              "weight": 400,
+              "color": "$text",
+              "anchor": {
+                "x": 540,
+                "y": 820
+              },
+              "lineHeight": 1.08,
+              "letterSpacing": -1,
+              "maxWidth": 860,
+              "split": {
+                "by": "word",
+                "start": 1,
+                "stagger": 0.38,
+                "duration": 1.1,
+                "easing": "ease-in-out",
+                "from": {
+                  "y": 36,
+                  "opacity": 0
+                }
+              },
+              "keyframes": []
+            },
+            {
+              "type": "path",
+              "id": "divider",
+              "d": "M450,1000 C510,985 570,1015 630,1000",
+              "stroke": "#ff6f61",
+              "strokeWidth": 4,
+              "pathLength": 1,
+              "keyframes": [
+                {
+                  "t": 3.6,
+                  "strokeDashoffset": 1
+                },
+                {
+                  "t": 4.6,
+                  "strokeDashoffset": 0,
+                  "easing": "cubic-bezier(0.65,0,0.35,1)"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "line-b",
+              "content": "*La constance*\nle garde.",
+              "font": "Instrument Serif",
+              "size": 124,
+              "weight": 400,
+              "italic": true,
+              "color": "$text",
+              "highlight": {
+                "type": "linear",
+                "angle": 90,
+                "stops": [
+                  [
+                    "#ffb36b",
+                    0
+                  ],
+                  [
+                    "#ff6f61",
+                    1
+                  ]
+                ]
+              },
+              "anchor": {
+                "x": 540,
+                "y": 1180
+              },
+              "lineHeight": 1.05,
+              "letterSpacing": -1,
+              "maxWidth": 860,
+              "split": {
+                "by": "word",
+                "start": 4.8,
+                "stagger": 0.42,
+                "duration": 1.2,
+                "easing": "cubic-bezier(0.16,1,0.3,1)",
+                "from": {
+                  "y": 40,
+                  "opacity": 0,
+                  "scale": 0.96
+                }
+              },
+              "keyframes": []
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "ref": "lower-third",
+          "start": 9.5,
+          "props": {
+            "name": "Inès Duval",
+            "role": "Directrice artistique",
+            "font": "Instrument Serif",
+            "size": 58,
+            "accent": "$primary",
+            "duration": 8.6
+          }
+        }
+      ],
+      "start": 6,
+      "transitionIn": {
+        "type": "fade",
+        "duration": 0.5
+      },
+      "transitionOut": {
+        "type": "wipe-up",
+        "duration": 0.6,
+        "easing": "cubic-bezier(0.65,0,0.35,1)"
+      }
+    },
+    {
+      "id": "question",
+      "duration": 8.6,
+      "layers": [
+        {
+          "type": "group",
+          "id": "heart-0",
+          "anchor": {
+            "x": 260,
+            "y": 640
+          },
+          "pivot": {
+            "x": 12,
+            "y": 12
+          },
+          "scale": 2.9166666666666665,
+          "keyframes": [
+            {
+              "t": 0.6,
+              "scale": 0,
+              "rotate": -36
+            },
+            {
+              "t": 1.5,
+              "scale": 2.9166666666666665,
+              "rotate": -18,
+              "easing": "elastic"
+            },
+            {
+              "t": 1.6,
+              "y": 0
+            },
+            {
+              "t": 4.1,
+              "y": -30,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.6,
+              "y": 0,
+              "easing": "ease-in-out"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "heart-0-0",
+              "d": "M12 20.5s-7.6-4.6-9.4-9.3C1.3 7.7 3.5 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.5 0 5.7 3.2 4.4 6.7-1.8 4.7-9.4 9.3-9.4 9.3z",
+              "fill": "#ff6f61"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "heart-1",
+          "anchor": {
+            "x": 830,
+            "y": 700
+          },
+          "pivot": {
+            "x": 12,
+            "y": 12
+          },
+          "scale": 4.166666666666667,
+          "keyframes": [
+            {
+              "t": 0.9,
+              "scale": 0,
+              "rotate": 28
+            },
+            {
+              "t": 1.8,
+              "scale": 4.166666666666667,
+              "rotate": 14,
+              "easing": "elastic"
+            },
+            {
+              "t": 1.9,
+              "y": 0
+            },
+            {
+              "t": 4.4,
+              "y": -30,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.9,
+              "y": 0,
+              "easing": "ease-in-out"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "heart-1-0",
+              "d": "M12 20.5s-7.6-4.6-9.4-9.3C1.3 7.7 3.5 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.5 0 5.7 3.2 4.4 6.7-1.8 4.7-9.4 9.3-9.4 9.3z",
+              "fill": "#ff9ec4"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "heart-2",
+          "anchor": {
+            "x": 200,
+            "y": 1300
+          },
+          "pivot": {
+            "x": 12,
+            "y": 12
+          },
+          "scale": 2.9166666666666665,
+          "keyframes": [
+            {
+              "t": 1.2,
+              "scale": 0,
+              "rotate": 20
+            },
+            {
+              "t": 2.1,
+              "scale": 2.9166666666666665,
+              "rotate": 10,
+              "easing": "elastic"
+            },
+            {
+              "t": 2.2,
+              "y": 0
+            },
+            {
+              "t": 4.7,
+              "y": -30,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 7.2,
+              "y": 0,
+              "easing": "ease-in-out"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "heart-2-0",
+              "d": "M12 20.5s-7.6-4.6-9.4-9.3C1.3 7.7 3.5 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.5 0 5.7 3.2 4.4 6.7-1.8 4.7-9.4 9.3-9.4 9.3z",
+              "fill": "#ff6f61"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "heart-3",
+          "anchor": {
+            "x": 880,
+            "y": 1260
+          },
+          "pivot": {
+            "x": 12,
+            "y": 12
+          },
+          "scale": 4.166666666666667,
+          "keyframes": [
+            {
+              "t": 1.5,
+              "scale": 0,
+              "rotate": -24
+            },
+            {
+              "t": 2.4,
+              "scale": 4.166666666666667,
+              "rotate": -12,
+              "easing": "elastic"
+            },
+            {
+              "t": 2.5,
+              "y": 0
+            },
+            {
+              "t": 5,
+              "y": -30,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 7.5,
+              "y": 0,
+              "easing": "ease-in-out"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "heart-3-0",
+              "d": "M12 20.5s-7.6-4.6-9.4-9.3C1.3 7.7 3.5 4.5 7 4.5c2 0 3.6 1.1 5 3 1.4-1.9 3-3 5-3 3.5 0 5.7 3.2 4.4 6.7-1.8 4.7-9.4 9.3-9.4 9.3z",
+              "fill": "#ff9ec4"
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "ref": "title-card",
+          "start": 0.3,
+          "props": {
+            "title": "Et toi, qu’est-ce\nque tu *répètes*\nchaque jour ?",
+            "style": "pop",
+            "font": "Instrument Serif",
+            "weight": 400,
+            "size": 116,
+            "y": 890,
+            "underline": false,
+            "subtitle": "Réponds en commentaire.",
+            "subtitleColor": "$text/75",
+            "accent": "$accent",
+            "exit": 7.7
+          }
+        }
+      ],
+      "start": 25.4,
+      "transitionIn": {
+        "type": "wipe-up",
+        "duration": 0.6,
+        "easing": "cubic-bezier(0.65,0,0.35,1)"
+      },
+      "transitionOut": {
+        "type": "zoom",
+        "duration": 0.5,
+        "easing": "ease-in"
+      }
+    },
+    {
+      "id": "partage",
+      "duration": 6.5,
+      "layers": [
+        {
+          "type": "image",
+          "id": "logo",
+          "src": "@logo",
+          "width": 180,
+          "anchor": {
+            "x": 540,
+            "y": 700
+          },
+          "keyframes": [
+            {
+              "t": 0.2,
+              "scale": 0,
+              "rotate": -30
+            },
+            {
+              "t": 1.1,
+              "scale": 1,
+              "rotate": 0,
+              "easing": "spring(200,12)"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "share",
+          "content": "Partage-la à quelqu’un\nqui en a *besoin*.",
+          "font": "Instrument Serif",
+          "size": 84,
+          "weight": 400,
+          "color": "$text",
+          "highlight": "#ffb36b",
+          "anchor": {
+            "x": 540,
+            "y": 1000
+          },
+          "lineHeight": 1.12,
+          "letterSpacing": 0,
+          "maxWidth": 860,
+          "split": {
+            "by": "word",
+            "start": 0.7,
+            "stagger": 0.09,
+            "duration": 0.8,
+            "easing": "ease-out",
+            "from": {
+              "y": 30,
+              "opacity": 0
+            }
+          },
+          "keyframes": []
+        },
+        {
+          "type": "group",
+          "id": "save",
+          "pivot": {
+            "x": 540,
+            "y": 1220
+          },
+          "keyframes": [
+            {
+              "t": 1.8,
+              "scale": 0.4,
+              "opacity": 0
+            },
+            {
+              "t": 2.3,
+              "scale": 1,
+              "opacity": 1,
+              "easing": "back(2.4)"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "save-bg",
+              "shape": {
+                "type": "rect",
+                "x": 398.4,
+                "y": 1190,
+                "width": 283.2,
+                "height": 60,
+                "radius": 30
+              },
+              "fill": "rgba(255,179,107,0.16)",
+              "stroke": "rgba(255,179,107,0.6)",
+              "strokeWidth": 2
+            },
+            {
+              "type": "text",
+              "id": "save-t",
+              "content": "ENREGISTRE ✦",
+              "font": "Inter",
+              "size": 30,
+              "weight": 600,
+              "color": "#ffb36b",
+              "letterSpacing": 2,
+              "anchor": {
+                "x": 540,
+                "y": 1220
+              }
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "handle",
+          "content": "@lumen.daily",
+          "font": "Inter",
+          "size": 34,
+          "weight": 600,
+          "color": "$text/70",
+          "letterSpacing": 2,
+          "anchor": {
+            "x": 540,
+            "y": 1330
+          },
+          "keyframes": [
+            {
+              "t": 2.3,
+              "opacity": 0
+            },
+            {
+              "t": 2.9,
+              "opacity": 1,
+              "easing": "ease-in"
+            }
+          ]
+        }
+      ],
+      "start": 33.5,
+      "transitionIn": {
+        "type": "zoom",
+        "duration": 0.5
+      },
+      "transitionOut": {
+        "type": "fade",
+        "duration": 1,
+        "easing": "ease-in-out"
+      }
+    }
+  ]
+}

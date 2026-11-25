@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <title>Motion Engine · 9:16</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <!-- ───────────── Barre du haut ───────────── -->
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">Motion<b>Engine</b></span>
+          <span class="chip">9:16</span>
+        </div>
+        <div class="topbar-actions">
+          <label class="select">
+            <span class="sr-only">Exemple</span>
+            <select id="example-select" aria-label="Choisir un exemple"></select>
+          </label>
+          <label class="btn btn-ghost" for="file-input" title="Charger un storyboard.json (ou glisser-déposer)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M5 20h14" /></svg>
+            Ouvrir un JSON
+          </label>
+          <input type="file" id="file-input" accept=".json,application/json" hidden />
+        </div>
+      </header>
+
+      <!-- ───────────── Espace de travail ───────────── -->
+      <main class="workspace">
+        <section class="stage-wrap" id="stage-wrap">
+          <div class="stage" id="stage">
+            <canvas id="canvas" width="1080" height="1920"></canvas>
+            <!-- Calque de debug (safe-areas) : jamais capturé à l'export -->
+            <canvas id="overlay" width="1080" height="1920"></canvas>
+            <div class="loader" id="loader" hidden>
+              <div class="spinner"></div>
+              <p id="loader-text">Chargement…</p>
+            </div>
+          </div>
+          <div class="dropzone" id="dropzone" hidden>
+            <div class="dropzone-inner">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0l-4 4m4-4l4 4M5 20h14" /></svg>
+              <p>Déposez votre <code>storyboard.json</code></p>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel">
+          <section class="card">
+            <h2 class="card-title">Storyboard</h2>
+            <div class="sb-title" id="sb-title">—</div>
+            <dl class="stats" id="sb-stats"></dl>
+          </section>
+
+          <section class="card">
+            <h2 class="card-title">Scènes</h2>
+            <ol class="scene-list" id="scene-list"></ol>
+          </section>
+
+          <section class="card" id="diagnostics-card">
+            <h2 class="card-title">Diagnostics <span class="badge" id="diag-badge">0</span></h2>
+            <ul class="diagnostics" id="diagnostics"></ul>
+          </section>
+
+          <section class="card">
+            <h2 class="card-title">Export vidéo</h2>
+            <div class="export-grid">
+              <label class="field">
+                <span>Cadence</span>
+                <select id="export-fps">
+                  <option value="native" selected>Native</option>
+                  <option value="30">30 fps — export allégé</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Qualité</span>
+                <select id="export-quality">
+                  <option value="8000000">Standard · 8 Mb/s</option>
+                  <option value="16000000" selected>Haute · 16 Mb/s</option>
+                  <option value="25000000">Max · 25 Mb/s</option>
+                </select>
+              </label>
+              <label class="field field-wide">
+                <span>Mode</span>
+                <select id="export-pace">
+                  <option value="auto" selected>Auto — calibre l'encodeur, aucune image perdue</option>
+                  <option value="1">Temps réel — durée = durée de la vidéo</option>
+                  <option value="2">Sûr — 2× plus lent</option>
+                  <option value="4">Très sûr — 4× plus lent</option>
+                </select>
+              </label>
+            </div>
+            <button class="btn btn-primary btn-block" id="export-btn">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0l-4-4m4 4l4-4M5 20h14" /></svg>
+              Export WebM
+            </button>
+            <div class="export-progress" id="export-progress" hidden>
+              <div class="progress"><div class="progress-bar" id="export-bar"></div></div>
+              <div class="export-meta">
+                <span id="export-status">Préparation…</span>
+                <button class="link-btn" id="export-cancel">Annuler</button>
+              </div>
+            </div>
+            <p class="hint" id="export-hint">
+              Rendu image par image, horodatages exacts. Gardez l'onglet au premier plan pendant l'export.
+            </p>
+          </section>
+        </aside>
+      </main>
+
+      <!-- ───────────── Transport ───────────── -->
+      <footer class="transport">
+        <button class="icon-btn play" id="play-btn" aria-label="Lecture / pause (Espace)" title="Lecture / pause (Espace)">
+          <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" /></svg>
+          <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" /></svg>
+        </button>
+        <div class="timecode">
+          <span id="time-current">00:00.00</span>
+          <span class="sep">/</span>
+          <span id="time-total">00:00.00</span>
+        </div>
+        <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="Timeline" aria-valuemin="0">
+          <div class="scrub-track">
+            <div class="scrub-scenes" id="scrub-scenes"></div>
+            <div class="scrub-fill" id="scrub-fill"></div>
+          </div>
+          <div class="scrub-handle" id="scrub-handle"></div>
+          <div class="scrub-tooltip" id="scrub-tooltip" hidden></div>
+        </div>
+        <span class="frame-counter" id="frame-counter">#0000</span>
+        <div class="toggles">
+          <button class="toggle" id="loop-btn" aria-pressed="true" title="Lecture en boucle (L)">Boucle</button>
+          <button class="toggle" id="safe-btn" aria-pressed="false" title="Afficher les safe-areas TikTok (S)">Safe-areas</button>
+        </div>
+      </footer>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="560" viewBox="0 0 640 560">
+  <defs>
+    <linearGradient id="body" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#454b55"/>
+      <stop offset="0.4" stop-color="#1d2026"/>
+      <stop offset="1" stop-color="#0a0b0e"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a616d"/>
+      <stop offset="1" stop-color="#262a31"/>
+    </linearGradient>
+    <linearGradient id="seam" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c6ff3d"/>
+      <stop offset="1" stop-color="#3de2ff"/>
+    </linearGradient>
+    <radialGradient id="spec" cx="0.28" cy="0.15" r="0.75">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#000000" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="320" cy="500" rx="250" ry="36" fill="url(#shadow)"/>
+  <rect x="90" y="80" width="460" height="400" rx="170" fill="url(#body)"/>
+  <path d="M90 230 C90 146 156 80 250 80 H390 C484 80 550 146 550 230 V250 H90 Z" fill="url(#lid)"/>
+  <rect x="90" y="246" width="460" height="9" fill="url(#seam)"/>
+  <path d="M170 92 H470" stroke="url(#edge)" stroke-width="4" stroke-linecap="round"/>
+  <rect x="90" y="80" width="460" height="400" rx="170" fill="url(#spec)"/>
+  <text x="320" y="360" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" letter-spacing="14" fill="#ffffff" fill-opacity="0.88" text-anchor="middle">PULSE</text>
+  <rect x="296" y="408" width="48" height="10" rx="5" fill="#c6ff3d"/>
+</svg>

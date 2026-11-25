@@ -1,0 +1,2421 @@
+{
+  "meta": {
+    "title": "Hook express — 3 règles pour capter",
+    "width": 1080,
+    "height": 1920,
+    "fps": 60,
+    "background": "#05050b",
+    "safeArea": {
+      "top": 220,
+      "bottom": 320,
+      "left": 0,
+      "right": 110
+    },
+    "grain": 0.07
+  },
+  "theme": {
+    "palette": {
+      "primary": "#4f9cff",
+      "accent": "#ff5e8a",
+      "violet": "#8b7bff",
+      "text": "#ffffff",
+      "background": "#05050b"
+    },
+    "fonts": [
+      "Space Grotesk",
+      "Inter"
+    ]
+  },
+  "assets": {
+    "logo": "./assets/logo-nova.svg"
+  },
+  "scenes": [
+    {
+      "id": "hook",
+      "duration": 3.3,
+      "layers": [
+        {
+          "type": "path",
+          "id": "orb-a",
+          "shape": {
+            "type": "circle",
+            "cx": 220,
+            "cy": 560,
+            "r": 520
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(139,123,255,0.85)",
+                0
+              ],
+              [
+                "rgba(139,123,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(139,123,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 1.65,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 3.3,
+              "x": 80,
+              "y": 60,
+              "easing": "linear"
+            },
+            {
+              "t": 3.3,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "orb-b",
+          "shape": {
+            "type": "circle",
+            "cx": 900,
+            "cy": 1380,
+            "r": 560
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(255,94,138,0.85)",
+                0
+              ],
+              [
+                "rgba(255,94,138,0.3)",
+                0.45
+              ],
+              [
+                "rgba(255,94,138,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 1.65,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 3.3,
+              "x": -60,
+              "y": -90,
+              "easing": "linear"
+            },
+            {
+              "t": 3.3,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "grid",
+          "d": "M108,0 V1920 M216,0 V1920 M324,0 V1920 M432,0 V1920 M540,0 V1920 M648,0 V1920 M756,0 V1920 M864,0 V1920 M972,0 V1920 M0,108 H1080 M0,216 H1080 M0,324 H1080 M0,432 H1080 M0,540 H1080 M0,648 H1080 M0,756 H1080 M0,864 H1080 M0,972 H1080 M0,1080 H1080 M0,1188 H1080 M0,1296 H1080 M0,1404 H1080 M0,1512 H1080 M0,1620 H1080 M0,1728 H1080 M0,1836 H1080",
+          "stroke": "rgba(255,255,255,0.09)",
+          "strokeWidth": 1.5,
+          "keyframes": [
+            {
+              "t": 0,
+              "opacity": 0
+            },
+            {
+              "t": 1.2,
+              "opacity": 1,
+              "easing": "ease-out"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "wave",
+          "layers": [
+            {
+              "type": "path",
+              "id": "wave-0",
+              "shape": {
+                "type": "circle",
+                "cx": 540,
+                "cy": 850,
+                "r": 120
+              },
+              "stroke": "rgba(255,94,138,0.8)",
+              "strokeWidth": 6,
+              "fill": "none",
+              "pivot": "center",
+              "keyframes": [
+                {
+                  "t": 0.12,
+                  "scale": 0.2,
+                  "opacity": 0
+                },
+                {
+                  "t": 0.17,
+                  "opacity": 1,
+                  "easing": "linear"
+                },
+                {
+                  "t": 1.22,
+                  "scale": 4.5,
+                  "opacity": 0,
+                  "easing": "ease-out-cubic"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "wave-1",
+              "shape": {
+                "type": "circle",
+                "cx": 540,
+                "cy": 850,
+                "r": 120
+              },
+              "stroke": "rgba(255,94,138,0.8)",
+              "strokeWidth": 4.5,
+              "fill": "none",
+              "pivot": "center",
+              "keyframes": [
+                {
+                  "t": 0.24,
+                  "scale": 0.2,
+                  "opacity": 0
+                },
+                {
+                  "t": 0.29,
+                  "opacity": 1,
+                  "easing": "linear"
+                },
+                {
+                  "t": 1.34,
+                  "scale": 4.5,
+                  "opacity": 0,
+                  "easing": "ease-out-cubic"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "wave-2",
+              "shape": {
+                "type": "circle",
+                "cx": 540,
+                "cy": 850,
+                "r": 120
+              },
+              "stroke": "rgba(255,94,138,0.8)",
+              "strokeWidth": 3,
+              "fill": "none",
+              "pivot": "center",
+              "keyframes": [
+                {
+                  "t": 0.36,
+                  "scale": 0.2,
+                  "opacity": 0
+                },
+                {
+                  "t": 0.41,
+                  "opacity": 1,
+                  "easing": "linear"
+                },
+                {
+                  "t": 1.46,
+                  "scale": 4.5,
+                  "opacity": 0,
+                  "easing": "ease-out-cubic"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "camera",
+          "keyframes": [
+            {
+              "t": 0.28,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0.32,
+              "x": -14,
+              "y": 8,
+              "easing": "linear"
+            },
+            {
+              "t": 0.36,
+              "x": 12,
+              "y": -6,
+              "easing": "linear"
+            },
+            {
+              "t": 0.4,
+              "x": -8,
+              "y": 4,
+              "easing": "linear"
+            },
+            {
+              "t": 0.46,
+              "x": 0,
+              "y": 0,
+              "easing": "linear"
+            }
+          ],
+          "layers": [
+            {
+              "type": "text",
+              "id": "stop",
+              "content": "STOP",
+              "font": "Space Grotesk",
+              "size": 300,
+              "weight": 700,
+              "letterSpacing": -12,
+              "color": {
+                "type": "linear",
+                "angle": 90,
+                "stops": [
+                  [
+                    "#ffffff",
+                    0
+                  ],
+                  [
+                    "#ffd1de",
+                    1
+                  ]
+                ]
+              },
+              "anchor": {
+                "x": 540,
+                "y": 850
+              },
+              "shadow": {
+                "color": "rgba(255,94,138,0.6)",
+                "blur": 60
+              },
+              "keyframes": [
+                {
+                  "t": 0.05,
+                  "scale": 2.8,
+                  "opacity": 0
+                },
+                {
+                  "t": 0.12,
+                  "opacity": 1,
+                  "easing": "linear"
+                },
+                {
+                  "t": 0.7,
+                  "scale": 1,
+                  "easing": "spring(260,12)"
+                },
+                {
+                  "t": 2.6,
+                  "scale": 1.06,
+                  "easing": "ease-in-out"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "hook-sub",
+          "content": "Tu as *3 secondes*\npour accrocher.",
+          "font": "Space Grotesk",
+          "size": 64,
+          "weight": 600,
+          "color": "$text",
+          "highlight": "#ff5e8a",
+          "anchor": {
+            "x": 540,
+            "y": 1100
+          },
+          "lineHeight": 1.15,
+          "letterSpacing": 0,
+          "maxWidth": 860,
+          "split": {
+            "by": "word",
+            "start": 0.85,
+            "stagger": 0.08,
+            "duration": 0.55,
+            "easing": "back",
+            "from": {
+              "scale": 0.3,
+              "opacity": 0,
+              "y": 20
+            }
+          },
+          "keyframes": []
+        },
+        {
+          "type": "path",
+          "id": "vignette",
+          "shape": {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1920
+          },
+          "fill": {
+            "type": "radial",
+            "center": {
+              "x": 540,
+              "y": 883.2
+            },
+            "radius": 1382.3999999999999,
+            "stops": [
+              [
+                "rgba(0,0,0,0)",
+                0.45
+              ],
+              [
+                "rgba(0,0,0,0.7)",
+                1
+              ]
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "linear",
+        "angle": 165,
+        "stops": [
+          [
+            "#0b0b1f",
+            0
+          ],
+          [
+            "#05050b",
+            0.6
+          ],
+          [
+            "#12071a",
+            1
+          ]
+        ]
+      },
+      "transitionOut": {
+        "type": "flash",
+        "duration": 0.3,
+        "easing": "ease-out"
+      }
+    },
+    {
+      "id": "regle-1",
+      "duration": 6.2,
+      "layers": [
+        {
+          "type": "path",
+          "id": "orb-c",
+          "shape": {
+            "type": "circle",
+            "cx": 860,
+            "cy": 520,
+            "r": 480
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(79,156,255,0.85)",
+                0
+              ],
+              [
+                "rgba(79,156,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(79,156,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 3.1,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.2,
+              "x": -90,
+              "y": 40,
+              "easing": "linear"
+            },
+            {
+              "t": 6.2,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "orb-d",
+          "shape": {
+            "type": "circle",
+            "cx": 160,
+            "cy": 1420,
+            "r": 420
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(139,123,255,0.85)",
+                0
+              ],
+              [
+                "rgba(139,123,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(139,123,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 3.1,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.2,
+              "x": 70,
+              "y": -60,
+              "easing": "linear"
+            },
+            {
+              "t": 6.2,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "corners",
+          "d": "M60,310 V240 H130 M950,240 H1020 V310 M1020,1510 V1580 H950 M130,1580 H60 V1510",
+          "stroke": "rgba(255,255,255,0.55)",
+          "strokeWidth": 3,
+          "lineCap": "square",
+          "pathLength": 1,
+          "keyframes": [
+            {
+              "t": 0.1,
+              "strokeDashoffset": 1
+            },
+            {
+              "t": 1,
+              "strokeDashoffset": 0,
+              "easing": "cubic-bezier(0.65,0,0.35,1)"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "bolt",
+          "anchor": {
+            "x": 540,
+            "y": 560
+          },
+          "pivot": {
+            "x": 12,
+            "y": 12
+          },
+          "scale": 5,
+          "keyframes": [
+            {
+              "t": 0.1,
+              "scale": 0,
+              "rotate": -40
+            },
+            {
+              "t": 1,
+              "scale": 5,
+              "rotate": 0,
+              "easing": "elastic"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "bolt-0",
+              "d": "M13.5 2L4.5 13.5h6.5l-1 8.5 9.5-12h-6.8l0.8-8z",
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#4f9cff",
+                    0
+                  ],
+                  [
+                    "#ff5e8a",
+                    1
+                  ]
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "ref": "title-card",
+          "start": 0.25,
+          "props": {
+            "kicker": "Règle n°1",
+            "title": "Accroche\n*immédiate*",
+            "subtitle": "Le premier mouvement décide de tout.",
+            "style": "rise",
+            "size": 132,
+            "y": 970,
+            "accent": "$accent",
+            "exit": 5.5
+          }
+        },
+        {
+          "type": "path",
+          "id": "vignette",
+          "shape": {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1920
+          },
+          "fill": {
+            "type": "radial",
+            "center": {
+              "x": 540,
+              "y": 883.2
+            },
+            "radius": 1382.3999999999999,
+            "stops": [
+              [
+                "rgba(0,0,0,0)",
+                0.45
+              ],
+              [
+                "rgba(0,0,0,0.7)",
+                1
+              ]
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "linear",
+        "angle": 180,
+        "stops": [
+          [
+            "#060b1e",
+            0
+          ],
+          [
+            "#05050b",
+            1
+          ]
+        ]
+      },
+      "transitionIn": {
+        "type": "flash",
+        "duration": 0.3
+      },
+      "transitionOut": {
+        "type": "slide-up",
+        "duration": 0.45,
+        "easing": "cubic-bezier(0.7,0,0.2,1)"
+      }
+    },
+    {
+      "id": "regle-2",
+      "duration": 6,
+      "layers": [
+        {
+          "type": "path",
+          "id": "orb-e",
+          "shape": {
+            "type": "circle",
+            "cx": 540,
+            "cy": 1500,
+            "r": 620
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(255,94,138,0.85)",
+                0
+              ],
+              [
+                "rgba(255,94,138,0.3)",
+                0.45
+              ],
+              [
+                "rgba(255,94,138,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 3,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6,
+              "x": 0,
+              "y": -120,
+              "easing": "linear"
+            },
+            {
+              "t": 6,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "morph",
+          "shape": {
+            "type": "circle",
+            "cx": 540,
+            "cy": 600,
+            "r": 120
+          },
+          "fill": {
+            "type": "linear",
+            "angle": 135,
+            "stops": [
+              [
+                "#4f9cff",
+                0
+              ],
+              [
+                "#8b7bff",
+                0.5
+              ],
+              [
+                "#ff5e8a",
+                1
+              ]
+            ]
+          },
+          "shadow": {
+            "color": "rgba(139,123,255,0.7)",
+            "blur": 70
+          },
+          "pivot": {
+            "x": 540,
+            "y": 600
+          },
+          "keyframes": [
+            {
+              "t": 0,
+              "scale": 0,
+              "rotate": -90
+            },
+            {
+              "t": 0.7,
+              "scale": 1,
+              "rotate": 0,
+              "easing": "back"
+            },
+            {
+              "t": 1.6,
+              "d": {
+                "type": "circle",
+                "cx": 540,
+                "cy": 600,
+                "r": 120
+              }
+            },
+            {
+              "t": 2.5,
+              "d": {
+                "type": "star",
+                "cx": 540,
+                "cy": 600,
+                "points": 5,
+                "outer": 160,
+                "inner": 70
+              },
+              "easing": "back(2.2)"
+            },
+            {
+              "t": 3.6,
+              "d": {
+                "type": "star",
+                "cx": 540,
+                "cy": 600,
+                "points": 5,
+                "outer": 160,
+                "inner": 70
+              }
+            },
+            {
+              "t": 4.5,
+              "d": {
+                "type": "rect",
+                "x": 420,
+                "y": 480,
+                "width": 240,
+                "height": 240,
+                "radius": 56
+              },
+              "easing": "spring(220,16)"
+            },
+            {
+              "t": 5.4,
+              "rotate": 0
+            },
+            {
+              "t": 6,
+              "rotate": 45,
+              "scale": 0.6,
+              "easing": "ease-in"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "type-block",
+          "keyframes": [
+            {
+              "t": 5.5,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 5.9,
+              "opacity": 0,
+              "y": -40,
+              "easing": "ease-in"
+            }
+          ],
+          "layers": [
+            {
+              "type": "text",
+              "id": "kicker",
+              "content": "RÈGLE N°2",
+              "font": "Inter",
+              "size": 30,
+              "weight": 600,
+              "letterSpacing": 6,
+              "color": "#4f9cff",
+              "anchor": {
+                "x": 540,
+                "y": 920
+              },
+              "keyframes": [
+                {
+                  "t": 0.3,
+                  "opacity": 0
+                },
+                {
+                  "t": 0.7,
+                  "opacity": 1,
+                  "easing": "ease-out"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "typed",
+              "content": "Un mouvement\n= *une idée*.",
+              "font": "Space Grotesk",
+              "size": 112,
+              "weight": 700,
+              "letterSpacing": -2,
+              "highlight": {
+                "type": "linear",
+                "angle": 90,
+                "stops": [
+                  [
+                    "#4f9cff",
+                    0
+                  ],
+                  [
+                    "#ff5e8a",
+                    1
+                  ]
+                ]
+              },
+              "anchor": {
+                "x": 540,
+                "y": 1080
+              },
+              "lineHeight": 1.05,
+              "split": {
+                "mode": "typewriter",
+                "start": 0.7,
+                "stagger": 0.06,
+                "cursor": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "vignette",
+          "shape": {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1920
+          },
+          "fill": {
+            "type": "radial",
+            "center": {
+              "x": 540,
+              "y": 883.2
+            },
+            "radius": 1382.3999999999999,
+            "stops": [
+              [
+                "rgba(0,0,0,0)",
+                0.45
+              ],
+              [
+                "rgba(0,0,0,0.7)",
+                1
+              ]
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "linear",
+        "angle": 200,
+        "stops": [
+          [
+            "#0d0718",
+            0
+          ],
+          [
+            "#05050b",
+            1
+          ]
+        ]
+      },
+      "transitionIn": {
+        "type": "slide-up",
+        "duration": 0.45,
+        "easing": "cubic-bezier(0.7,0,0.2,1)"
+      },
+      "transitionOut": {
+        "type": "zoom",
+        "duration": 0.4,
+        "easing": "ease-in"
+      }
+    },
+    {
+      "id": "regle-3",
+      "duration": 6.2,
+      "layers": [
+        {
+          "type": "path",
+          "id": "orb-f",
+          "shape": {
+            "type": "circle",
+            "cx": 900,
+            "cy": 700,
+            "r": 520
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(139,123,255,0.85)",
+                0
+              ],
+              [
+                "rgba(139,123,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(139,123,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 3.1,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.2,
+              "x": -120,
+              "y": 80,
+              "easing": "linear"
+            },
+            {
+              "t": 6.2,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "orb-g",
+          "shape": {
+            "type": "circle",
+            "cx": 180,
+            "cy": 1300,
+            "r": 480
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(79,156,255,0.85)",
+                0
+              ],
+              [
+                "rgba(79,156,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(79,156,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 3.1,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.2,
+              "x": 80,
+              "y": -40,
+              "easing": "linear"
+            },
+            {
+              "t": 6.2,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "kicker3",
+          "content": "RÈGLE N°3",
+          "font": "Inter",
+          "size": 30,
+          "weight": 600,
+          "letterSpacing": 6,
+          "color": "#ff5e8a",
+          "anchor": {
+            "x": 540,
+            "y": 560
+          },
+          "keyframes": [
+            {
+              "t": 0.1,
+              "opacity": 0,
+              "y": 20
+            },
+            {
+              "t": 0.5,
+              "opacity": 1,
+              "y": 0,
+              "easing": "ease-out"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "trio",
+          "content": "Rythme.\nContraste.\n*Répétition.*",
+          "font": "Space Grotesk",
+          "size": 136,
+          "weight": 700,
+          "color": "$text",
+          "highlight": {
+            "type": "linear",
+            "angle": 90,
+            "stops": [
+              [
+                "#ff5e8a",
+                0
+              ],
+              [
+                "#8b7bff",
+                1
+              ]
+            ]
+          },
+          "anchor": {
+            "x": 540,
+            "y": 930
+          },
+          "lineHeight": 1.08,
+          "letterSpacing": -2.72,
+          "maxWidth": 860,
+          "split": {
+            "by": "line",
+            "start": 0.35,
+            "stagger": 0.55,
+            "duration": 0.7,
+            "easing": "back(2)",
+            "from": {
+              "x": -160,
+              "opacity": 0,
+              "scale": 0.85
+            }
+          },
+          "keyframes": [
+            {
+              "t": 5.6,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 6,
+              "opacity": 0,
+              "y": -60,
+              "easing": "ease-in"
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "id": "eq",
+          "keyframes": [
+            {
+              "t": 1.8,
+              "opacity": 0
+            },
+            {
+              "t": 2.2,
+              "opacity": 1,
+              "easing": "ease-out"
+            },
+            {
+              "t": 5.6,
+              "opacity": 1,
+              "y": 0
+            },
+            {
+              "t": 6,
+              "opacity": 0,
+              "y": 40,
+              "easing": "ease-in"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "eq-0",
+              "shape": {
+                "type": "rect",
+                "x": 302,
+                "y": 1320,
+                "width": 28,
+                "height": 60,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 316,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-1",
+              "shape": {
+                "type": "rect",
+                "x": 358,
+                "y": 1268,
+                "width": 28,
+                "height": 112,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 372,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-2",
+              "shape": {
+                "type": "rect",
+                "x": 414,
+                "y": 1216,
+                "width": 28,
+                "height": 164,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 428,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-3",
+              "shape": {
+                "type": "rect",
+                "x": 470,
+                "y": 1294,
+                "width": 28,
+                "height": 86,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 484,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-4",
+              "shape": {
+                "type": "rect",
+                "x": 526,
+                "y": 1242,
+                "width": 28,
+                "height": 138,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 540,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-5",
+              "shape": {
+                "type": "rect",
+                "x": 582,
+                "y": 1320,
+                "width": 28,
+                "height": 60,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 596,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-6",
+              "shape": {
+                "type": "rect",
+                "x": 638,
+                "y": 1268,
+                "width": 28,
+                "height": 112,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 652,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.8,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.3,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-7",
+              "shape": {
+                "type": "rect",
+                "x": 694,
+                "y": 1216,
+                "width": 28,
+                "height": 164,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 708,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.88,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.38,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            },
+            {
+              "type": "path",
+              "id": "eq-8",
+              "shape": {
+                "type": "rect",
+                "x": 750,
+                "y": 1294,
+                "width": 28,
+                "height": 86,
+                "radius": 14
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 180,
+                "stops": [
+                  [
+                    "#ff5e8a",
+                    0
+                  ],
+                  [
+                    "#4f9cff",
+                    1
+                  ]
+                ]
+              },
+              "pivot": {
+                "x": 764,
+                "y": 1380
+              },
+              "keyframes": [
+                {
+                  "t": 1.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 2.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 3.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 4.96,
+                  "scaleY": 0.35,
+                  "easing": "ease-in-out"
+                },
+                {
+                  "t": 5.46,
+                  "scaleY": 1,
+                  "easing": "ease-in-out"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "vignette",
+          "shape": {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1920
+          },
+          "fill": {
+            "type": "radial",
+            "center": {
+              "x": 540,
+              "y": 883.2
+            },
+            "radius": 1382.3999999999999,
+            "stops": [
+              [
+                "rgba(0,0,0,0)",
+                0.45
+              ],
+              [
+                "rgba(0,0,0,0.7)",
+                1
+              ]
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "linear",
+        "angle": 160,
+        "stops": [
+          [
+            "#0a0615",
+            0
+          ],
+          [
+            "#05050b",
+            1
+          ]
+        ]
+      },
+      "transitionIn": {
+        "type": "zoom",
+        "duration": 0.4
+      },
+      "transitionOut": {
+        "type": "circle",
+        "duration": 0.6,
+        "easing": "cubic-bezier(0.65,0,0.35,1)"
+      }
+    },
+    {
+      "id": "outro",
+      "duration": 10.05,
+      "layers": [
+        {
+          "type": "path",
+          "id": "orb-h",
+          "shape": {
+            "type": "circle",
+            "cx": 540,
+            "cy": 760,
+            "r": 700
+          },
+          "fill": {
+            "type": "radial",
+            "stops": [
+              [
+                "rgba(139,123,255,0.85)",
+                0
+              ],
+              [
+                "rgba(139,123,255,0.3)",
+                0.45
+              ],
+              [
+                "rgba(139,123,255,0)",
+                1
+              ]
+            ]
+          },
+          "blend": "screen",
+          "pivot": "center",
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "t": 0,
+              "x": 0,
+              "y": 0
+            },
+            {
+              "t": 0,
+              "scale": 1
+            },
+            {
+              "t": 5,
+              "scale": 1.14,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 10,
+              "x": 0,
+              "y": 40,
+              "easing": "linear"
+            },
+            {
+              "t": 10,
+              "scale": 1,
+              "easing": "ease-in-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "grid2",
+          "d": "M108,0 V1920 M216,0 V1920 M324,0 V1920 M432,0 V1920 M540,0 V1920 M648,0 V1920 M756,0 V1920 M864,0 V1920 M972,0 V1920 M0,108 H1080 M0,216 H1080 M0,324 H1080 M0,432 H1080 M0,540 H1080 M0,648 H1080 M0,756 H1080 M0,864 H1080 M0,972 H1080 M0,1080 H1080 M0,1188 H1080 M0,1296 H1080 M0,1404 H1080 M0,1512 H1080 M0,1620 H1080 M0,1728 H1080 M0,1836 H1080",
+          "stroke": "rgba(255,255,255,0.09)",
+          "strokeWidth": 1.5,
+          "keyframes": [
+            {
+              "t": 0.2,
+              "opacity": 0
+            },
+            {
+              "t": 1.4,
+              "opacity": 1,
+              "easing": "ease-out"
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "ref": "logo-reveal",
+          "start": 0.4,
+          "props": {
+            "src": "@logo",
+            "text": "NOVA",
+            "tagline": "Des vidéos qui *captent*.",
+            "y": 700,
+            "size": 240,
+            "accent": "$accent",
+            "accent2": "$primary"
+          }
+        },
+        {
+          "type": "group",
+          "id": "cta",
+          "pivot": {
+            "x": 540,
+            "y": 1340
+          },
+          "keyframes": [
+            {
+              "t": 2.6,
+              "scale": 0,
+              "opacity": 0
+            },
+            {
+              "t": 2.72,
+              "opacity": 1,
+              "easing": "linear"
+            },
+            {
+              "t": 3.4,
+              "scale": 1,
+              "easing": "elastic(1,0.45)"
+            },
+            {
+              "t": 3.8,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 4.4,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 5,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 5.6,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.2,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 6.8,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 7.4,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 8,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 8.6,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 9.2,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 9.8,
+              "scaleX": 1,
+              "scaleY": 1,
+              "easing": "ease-in-out"
+            },
+            {
+              "t": 10.4,
+              "scaleX": 1.04,
+              "scaleY": 1.04,
+              "easing": "ease-in-out"
+            }
+          ],
+          "layers": [
+            {
+              "type": "path",
+              "id": "cta-glow",
+              "shape": {
+                "type": "rect",
+                "x": 220,
+                "y": 1274,
+                "width": 640,
+                "height": 132,
+                "radius": 66
+              },
+              "fill": {
+                "type": "linear",
+                "angle": 90,
+                "stops": [
+                  [
+                    "#4f9cff",
+                    0
+                  ],
+                  [
+                    "#ff5e8a",
+                    1
+                  ]
+                ]
+              },
+              "shadow": {
+                "color": "rgba(255,94,138,0.6)",
+                "blur": 60,
+                "y": 10
+              }
+            },
+            {
+              "type": "text",
+              "id": "cta-label",
+              "content": "Abonne-toi",
+              "font": "Space Grotesk",
+              "size": 48,
+              "weight": 700,
+              "color": "#ffffff",
+              "anchor": {
+                "x": 506,
+                "y": 1340
+              }
+            },
+            {
+              "type": "group",
+              "id": "cta-arrow",
+              "anchor": {
+                "x": 774,
+                "y": 1340
+              },
+              "pivot": {
+                "x": 12,
+                "y": 12
+              },
+              "scale": 1.9166666666666667,
+              "keyframes": [
+                {
+                  "t": 3.6,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 4.2,
+                  "x": 14,
+                  "easing": "ease-out"
+                },
+                {
+                  "t": 4.8,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 5.4,
+                  "x": 14,
+                  "easing": "ease-out"
+                },
+                {
+                  "t": 6,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 6.6,
+                  "x": 14,
+                  "easing": "ease-out"
+                },
+                {
+                  "t": 7.2,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 7.8,
+                  "x": 14,
+                  "easing": "ease-out"
+                },
+                {
+                  "t": 8.4,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 9,
+                  "x": 14,
+                  "easing": "ease-out"
+                },
+                {
+                  "t": 9.6,
+                  "x": 0,
+                  "easing": "ease-in"
+                },
+                {
+                  "t": 10.2,
+                  "x": 14,
+                  "easing": "ease-out"
+                }
+              ],
+              "layers": [
+                {
+                  "type": "path",
+                  "id": "cta-arrow-0",
+                  "d": "M4.5 12h15M13.5 6l6 6-6 6",
+                  "stroke": "#ffffff",
+                  "strokeWidth": 2.6,
+                  "fill": "none",
+                  "lineCap": "round",
+                  "lineJoin": "round"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "teaser",
+          "content": "Partie 2 demain — les transitions",
+          "font": "Inter",
+          "size": 34,
+          "weight": 500,
+          "color": "$text/60",
+          "anchor": {
+            "x": 540,
+            "y": 1490
+          },
+          "keyframes": [
+            {
+              "t": 3.4,
+              "opacity": 0,
+              "y": 20
+            },
+            {
+              "t": 4,
+              "opacity": 1,
+              "y": 0,
+              "easing": "ease-out"
+            }
+          ]
+        },
+        {
+          "type": "path",
+          "id": "vignette",
+          "shape": {
+            "type": "rect",
+            "x": 0,
+            "y": 0,
+            "width": 1080,
+            "height": 1920
+          },
+          "fill": {
+            "type": "radial",
+            "center": {
+              "x": 540,
+              "y": 883.2
+            },
+            "radius": 1382.3999999999999,
+            "stops": [
+              [
+                "rgba(0,0,0,0)",
+                0.45
+              ],
+              [
+                "rgba(0,0,0,0.7)",
+                1
+              ]
+            ]
+          }
+        }
+      ],
+      "background": {
+        "type": "linear",
+        "angle": 180,
+        "stops": [
+          [
+            "#08081a",
+            0
+          ],
+          [
+            "#05050b",
+            1
+          ]
+        ]
+      },
+      "transitionOut": {
+        "type": "fade",
+        "duration": 0.6,
+        "easing": "ease-in-out"
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "type": "path",
+      "id": "progress-track",
+      "shape": {
+        "type": "rect",
+        "x": 60,
+        "y": 233,
+        "width": 960,
+        "height": 6,
+        "radius": 3
+      },
+      "fill": "rgba(255,255,255,0.12)"
+    },
+    {
+      "type": "path",
+      "id": "progress",
+      "shape": {
+        "type": "rect",
+        "x": 60,
+        "y": 233,
+        "width": 960,
+        "height": 6,
+        "radius": 3
+      },
+      "fill": {
+        "type": "linear",
+        "angle": 90,
+        "stops": [
+          [
+            "#4f9cff",
+            0
+          ],
+          [
+            "#ff5e8a",
+            1
+          ]
+        ]
+      },
+      "clipDirection": "left-to-right",
+      "keyframes": [
+        {
+          "t": 0,
+          "clipProgress": 0
+        },
+        {
+          "t": 30,
+          "clipProgress": 1,
+          "easing": "linear"
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "id": "signature",
+      "keyframes": [
+        {
+          "t": 0.6,
+          "opacity": 0
+        },
+        {
+          "t": 1.2,
+          "opacity": 0.9,
+          "easing": "ease-out"
+        }
+      ],
+      "layers": [
+        {
+          "type": "image",
+          "id": "signature-logo",
+          "src": "@logo",
+          "width": 52,
+          "anchor": {
+            "x": 96,
+            "y": 300
+          },
+          "keyframes": []
+        },
+        {
+          "type": "text",
+          "id": "signature-handle",
+          "content": "@nova.studio",
+          "font": "Inter",
+          "size": 30,
+          "weight": 600,
+          "align": "left",
+          "color": "$text/85",
+          "anchor": {
+            "x": 136,
+            "y": 300
+          }
+        }
+      ]
+    }
+  ]
+}
