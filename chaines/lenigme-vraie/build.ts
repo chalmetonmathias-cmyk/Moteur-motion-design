@@ -14,14 +14,13 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseStoryboard } from '../../src/parser/parser.ts';
 import type { StoryboardInput } from '../../src/types/storyboard.ts';
-import type { Segment } from './charte.ts';
+import type { Alignement, Segment } from './charte.ts';
 
 interface EpisodeModule {
   ID: string;
-  TOTAL: number;
   fiche(): string;
-  applyVoice?(alignement: unknown): void;
-  build(): { storyboard: StoryboardInput; narration: Segment[]; cues: { t: number; type: string }[] };
+  applyVoice?(alignement: Alignement): void;
+  build(): { storyboard: StoryboardInput; narration: Segment[]; cues: { t: number; type: string }[]; total: number };
 }
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -33,7 +32,7 @@ if (existsSync(alignPath) && mod.applyVoice) {
   mod.applyVoice(JSON.parse(readFileSync(alignPath, 'utf8')));
   console.log('↻ minutage recalé sur la voix (voix/alignement.json)');
 }
-const { storyboard, narration, cues } = mod.build();
+const { storyboard, narration, cues, total } = mod.build();
 
 const parsed = parseStoryboard(JSON.parse(JSON.stringify(storyboard)));
 if (!parsed.ok) {
@@ -45,8 +44,8 @@ for (const w of parsed.warnings) console.warn(`⚠ ${w.path} : ${w.message}`);
 const out = join(here, 'sortie', id);
 mkdirSync(out, { recursive: true });
 writeFileSync(join(out, 'storyboard.json'), JSON.stringify(storyboard, null, 2) + '\n');
-writeFileSync(join(out, 'narration.json'), JSON.stringify({ episode: id, duree: mod.TOTAL, segments: narration.map((s) => ({ ...s, texte_voix: s.text.replace(/\*/g, '') })) }, null, 2) + '\n');
-writeFileSync(join(out, 'cues.json'), JSON.stringify({ duree: mod.TOTAL, cues }, null, 2) + '\n');
+writeFileSync(join(out, 'narration.json'), JSON.stringify({ episode: id, duree: total, segments: narration.map((s) => ({ ...s, texte_voix: s.text.replace(/\*/g, '') })) }, null, 2) + '\n');
+writeFileSync(join(out, 'cues.json'), JSON.stringify({ duree: total, cues }, null, 2) + '\n');
 writeFileSync(join(out, 'fiche.md'), mod.fiche());
 
 const words = narration.reduce((n, s) => n + s.text.split(/\s+/).length, 0);

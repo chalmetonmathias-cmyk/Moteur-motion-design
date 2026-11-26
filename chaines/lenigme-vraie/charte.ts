@@ -5,7 +5,7 @@
  * animées, fiches "dossier", sous-titres mot à mot, verdict final en tampon
  * (PROUVÉ / DÉBATTU / LÉGENDE), 62–65 s pour être éligible aux Creator Rewards.
  */
-import type { KeyframeInput, LayerInput, PaintInput, SceneInput, StoryboardInput } from '../../src/types/storyboard.ts';
+import type { KeyframeInput, LayerInput, PaintInput, SceneInput, StoryboardInput, TransitionInput } from '../../src/types/storyboard.ts';
 import { alpha } from '../../src/components/util.ts';
 import { timeWords } from '../../src/components/captions.ts';
 
@@ -170,6 +170,29 @@ export function bastilleD(baseY: number): string {
   return parts.join(' ');
 }
 
+/** Sapin de taïga (contour fermé), pied en (bx, by), hauteur h, incliné de `deg` degrés (sens horaire). */
+export function sapinD(bx: number, by: number, h: number, deg = 0): string {
+  const pts: [number, number][] = [[-0.04, 0], [-0.04, -0.12], [-0.3, -0.12], [-0.11, -0.4], [-0.24, -0.4], [-0.08, -0.66], [-0.17, -0.66], [0, -1], [0.17, -0.66], [0.08, -0.66], [0.24, -0.4], [0.11, -0.4], [0.3, -0.12], [0.04, -0.12], [0.04, 0]];
+  const a = (deg * Math.PI) / 180, c = Math.cos(a), s = Math.sin(a);
+  return 'M' + pts.map(([x, y]) => `${r1(bx + (x * c - y * s) * h)},${r1(by + (x * s + y * c) * h)}`).join(' L') + ' Z';
+}
+
+/**
+ * Rangée de sapins entre x0 et x1 (positions et tailles déterministes).
+ * `fall(x)` donne l'inclinaison de chaque arbre : même graine + autre `fall`
+ * = même forêt couchée, d'où un morphing propre (arbres soufflés).
+ */
+export function foretD(baseY: number, x0: number, x1: number, n: number, seed: number, fall: (x: number) => number = () => 0, hMin = 70, hMax = 150): string {
+  let s = seed;
+  const rnd = () => ((s = (s * 16807) % 2147483647) / 2147483647);
+  const step = (x1 - x0) / (n - 1);
+  return Array.from({ length: n }, (_, k) => {
+    const x = x0 + k * step + (rnd() - 0.5) * step * 0.5;
+    const h = hMin + rnd() * (hMax - hMin);
+    return sapinD(x, baseY, h, fall(x));
+  }).join(' ');
+}
+
 /** Contour du masque de velours (ovale) — sans les yeux. */
 export function velvetOutline(cx: number, cy: number, s = 1): string {
   const p = (dx: number, dy: number) => `${r1(cx + dx * s)},${r1(cy + dy * s)}`;
@@ -216,6 +239,154 @@ export function header(dossier: string, total: number): LayerInput[] {
       ],
     },
   ];
+}
+
+/* ═══════════════════════ Briques de scène ═══════════════════════ */
+
+/** Texte machine à écrire (documents d'époque). */
+export const typewriter = (id: string, content: string, x: number, y: number, size: number, t0: number, o: Partial<{ color: string; maxWidth: number; stagger: number; align: 'left' | 'center' }> = {}): LayerInput => ({
+  type: 'text',
+  id,
+  content,
+  font: F.typewriter,
+  size,
+  weight: 400,
+  color: o.color ?? P.ink,
+  align: o.align ?? 'left',
+  anchor: { x, y },
+  maxWidth: o.maxWidth ?? 700,
+  lineHeight: 1.35,
+  split: { mode: 'typewriter', start: t0, stagger: o.stagger ?? 0.03, cursor: false },
+});
+
+/** Tampon (composant `stamp`) qui s'abat à l'instant t (local à la scène). */
+export const stampAt = (id: string, text: string, t: number, x: number, y: number, color: string, o: { size?: number; rotate?: number; sub?: string } = {}): LayerInput => {
+  return { type: 'component', ref: 'stamp', id, start: t, props: { text, x, y, color, size: o.size ?? 80, rotate: o.rotate ?? -9, font: F.typewriter, weight: 400, ...(o.sub ? { sub: o.sub } : {}) } };
+};
+
+/* ═══════════════════════ Atelier d'épisode ═══════════════════════ */
+
+export type AudioCueType = 'whoosh' | 'stamp' | 'tick-start' | 'tick-stop' | 'riser' | 'hit' | 'seal';
+export interface AudioCue { t: number; type: AudioCueType }
+/** `voix/alignement.json` écrit par audio/voix_elevenlabs.py. */
+export interface Alignement { segments: { id: string; duree: number; mots: { mot: string; t: number }[] }[] }
+export interface VerdictRow { label: string; stamp: 'PROUVÉ' | 'DÉBATTU' | 'LÉGENDE'; word: string }
+
+/** Chevauchement des transitions entre scènes (s). */
+export const X = 0.3;
+
+/**
+ * Outils communs à tous les épisodes, liés à leur narration : recalage sur la
+ * voix, scènes calées sur les segments, sous-titres, verdict et carte de fin.
+ */
+export function atelier(narration: Segment[], totalPrevu: number) {
+  const planned = narration.map((s) => s.end - s.start);
+  const cues: AudioCue[] = [];
+  let total = totalPrevu;
+
+  const seg = (id: string): Segment => {
+    const s = narration.find((x) => x.id === id);
+    if (!s) throw new Error(`segment « ${id} » introuvable`);
+    return s;
+  };
+  /** Instant LOCAL (relatif au début de la scène) où un mot est prononcé. */
+  const at = (id: string, word: string) => +(wordTime(seg(id), word) - seg(id).start).toFixed(2);
+
+  /**
+   * Recale l'épisode sur la vraie voix (alignement ElevenLabs) : chaque segment
+   * dure le temps de sa voix + 0,3 s de respiration, et ses mots prennent leurs
+   * instants réels (sous-titres, tampons et transitions tombent sur la voix).
+   */
+  function applyVoice(al: Alignement): void {
+    let t = 0;
+    narration.forEach((s, k) => {
+      const v = al.segments.find((x) => x.id === s.id);
+      const dur = v ? Math.max(2, v.duree + 0.3) : planned[k]!;
+      s.start = +t.toFixed(3);
+      s.end = +(t + dur).toFixed(3);
+      t += dur;
+      const nWords = s.text.split(/\s+/).filter(Boolean).length;
+      s.times = v && v.mots.length === nWords ? v.mots.map((m) => m.t) : undefined;
+    });
+    // Creator Rewards : jamais moins de 61 s (on allonge la carte de fin si besoin).
+    total = +Math.max(t + 1.4, 61).toFixed(3); // carte de fin après la dernière phrase
+  }
+
+  /** Scène calée sur un segment : fond, halo, poussières, calques, vignette. */
+  function sceneFor(id: string, layers: LayerInput[], out?: TransitionInput, endAt?: number): SceneInput {
+    const s = seg(id);
+    const i = narration.indexOf(s);
+    const next = narration[i + 1];
+    const end = endAt ?? (next ? next.start + (out ? X : 0) : total);
+    if (out && next) cues.push({ t: next.start, type: 'whoosh' });
+    return {
+      id,
+      start: s.start,
+      duration: +(end - s.start).toFixed(3),
+      background: sceneBackground,
+      ...(out ? { transitionOut: out } : {}),
+      layers: [glow(`${id}-glow`, CX, 820, 620, end - s.start), dust(`${id}-dust`, end - s.start, i + 3), ...layers, vignette()],
+    };
+  }
+
+  /** Sous-titres mot à mot de toute la narration (sur les vrais instants si la voix existe). */
+  const captions = (): LayerInput[] =>
+    narration.map((s) => ({
+      type: 'component',
+      ref: 'captions',
+      id: `sous-titres-${s.id}`,
+      start: s.start,
+      props: { text: s.text, duration: +(s.end - s.start).toFixed(3), y: CAPTION_Y, size: 60, font: F.ui, highlight: '$gold', wordsPerChunk: 4, ...(s.times ? { wordTimes: s.times.join(',') } : {}) },
+    }));
+
+  /** Dernière scène : tableau du verdict (un tampon par mot prononcé), puis carte de fin. */
+  function verdictScene(id: string, rows: VerdictRow[], cta = 'Ton hypothèse ? *En commentaire.*'): SceneInput {
+    const color = { 'PROUVÉ': P.prouve, 'DÉBATTU': P.debattu, 'LÉGENDE': P.legende } as const;
+    const rowsT = rows.map((r) => ({ ...r, t: at(id, r.word) }));
+    rowsT.forEach((r) => cues.push({ t: seg(id).start + r.t, type: 'stamp' }));
+    const tEnd = seg(id).end - seg(id).start; // fin de la narration (local)
+    cues.push({ t: seg(id).end, type: 'hit' });
+    const layers: LayerInput[] = [
+      {
+        type: 'group',
+        id: 'verdict-tableau',
+        keyframes: [kf(tEnd - 0.2, { opacity: 1, scale: 1 }), kf(tEnd + 0.3, { opacity: 0, scale: 0.94, easing: 'ease-in' })],
+        pivot: { x: CX, y: 800 },
+        layers: [
+          { type: 'text', id: 'verdict-titre', content: 'LE VERDICT', font: F.title, size: 96, weight: 900, letterSpacing: 6, color: gradient(180, [P.goldLight, 0], [P.gold, 1]), anchor: { x: CX, y: 450 }, keyframes: [kf(0, { scale: 1.6, opacity: 0 }), kf(0.45, { scale: 1, opacity: 1, easing: 'back(1.8)' })] },
+          drawn('verdict-regle', `M240,530 H${W - 240}`, 0.3, 0.6, { width: 3 }),
+          ...rowsT.flatMap((r, k): LayerInput[] => {
+            const y = 660 + k * 190;
+            return [
+              { type: 'text', id: `verdict-label-${k}`, content: r.label, font: F.ui, size: 40, weight: 700, align: 'left', anchor: { x: 120, y }, maxWidth: 470, keyframes: [kf(r.t - 0.8, { opacity: 0, x: -30 }), kf(r.t - 0.3, { opacity: 1, x: 0, easing: 'ease-out' })] },
+              stampAt(`verdict-stamp-${k}`, r.stamp, r.t, 790, y, color[r.stamp], { size: 64, rotate: k === 1 ? 7 : -8 }),
+            ];
+          }),
+        ],
+      },
+      // Carte de fin : logo + appel aux commentaires.
+      {
+        type: 'group',
+        id: 'fin',
+        pivot: { x: CX, y: 820 },
+        keyframes: [kf(tEnd + 0.1, { scale: 0.6, opacity: 0 }), kf(tEnd + 0.7, { scale: 1, opacity: 1, easing: 'spring(200,13)' })],
+        layers: [
+          { type: 'image', id: 'fin-logo', src: '@logo', width: 240, anchor: { x: CX, y: 740 } },
+          { type: 'text', id: 'fin-nom', content: 'L’ÉNIGME VRAIE', font: F.title, size: 70, weight: 900, color: P.gold, letterSpacing: 4, anchor: { x: CX, y: 940 } },
+          { type: 'text', id: 'fin-cta', content: cta, font: F.ui, size: 44, weight: 700, highlight: P.goldLight, anchor: { x: CX, y: 1030 } },
+        ],
+      },
+    ];
+    return sceneFor(id, layers, undefined, total);
+  }
+
+  /** Repères audio triés (musique et bruitages). */
+  const sortedCues = () => [...cues].sort((a, b) => a.t - b.t);
+
+  return {
+    cues, seg, at, applyVoice, sceneFor, captions, verdictScene, sortedCues,
+    get total() { return total; },
+  };
 }
 
 /* ═══════════════════════ Storyboard ═══════════════════════ */

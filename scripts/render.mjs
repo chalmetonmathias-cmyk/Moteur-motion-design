@@ -10,7 +10,8 @@
  *   --qualite 16000000     débit cible en bits/s (défaut 16 Mb/s)
  *   --rythme auto|1|2|4    mode d'export (défaut auto : calibrage, aucune image perdue)
  *   --miniature <t> <f>    enregistre la frame au temps t (s) en JPEG
- *   --sans-video           ne fait que la miniature (pas d'export)
+ *   --images <t1,t2,…> <dossier>  enregistre ces frames en PNG (contrôle visuel)
+ *   --sans-video           pas d'export vidéo (miniature / images seulement)
  *
  * Prérequis : `npm install`, Playwright (`npm i -D playwright` puis
  * `npx playwright install chromium`). Variable PROXY optionnelle (polices).
@@ -18,8 +19,8 @@
  */
 import { createServer } from 'vite';
 import { createRequire } from 'node:module';
-import { readFileSync, writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
@@ -30,14 +31,17 @@ const opt = (name, def) => {
   const i = args.indexOf(name);
   return i >= 0 ? args[i + 1] : def;
 };
-const valued = new Set(['--fps', '--qualite', '--rythme', '--miniature']);
-const [input, output] = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && valued.has(args[i - 1])) && !(i > 1 && args[i - 2] === '--miniature'));
+const valued = new Set(['--fps', '--qualite', '--rythme', '--miniature', '--images']);
+const twoArgs = new Set(['--miniature', '--images']);
+const [input, output] = args.filter((a, i) => !a.startsWith('--') && !(i > 0 && valued.has(args[i - 1])) && !(i > 1 && twoArgs.has(args[i - 2])));
 if (!input || !output) {
   console.error('Usage : node scripts/render.mjs <storyboard.json> <sortie.webm> [--fps 60|30] [--qualite 16000000] [--rythme auto|1|2|4] [--miniature <t> <fichier.jpg>]');
   process.exit(2);
 }
 const mi = args.indexOf('--miniature');
 const thumb = mi >= 0 ? { t: Number(args[mi + 1]), file: resolve(args[mi + 2]) } : null;
+const ii = args.indexOf('--images');
+const stills = ii >= 0 ? { times: args[ii + 1].split(',').map(Number), dir: resolve(args[ii + 2]) } : null;
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const server = await createServer({ root, logLevel: 'error', server: { port: 5190, strictPort: false } });
@@ -63,6 +67,18 @@ try {
     }, thumb.t);
     writeFileSync(thumb.file, Buffer.from(data.split(',')[1], 'base64'));
     console.log(`miniature → ${thumb.file}`);
+  }
+  if (stills) {
+    mkdirSync(stills.dir, { recursive: true });
+    for (const t of stills.times) {
+      const data = await page.evaluate((tt) => {
+        window.motionEngine.renderAt(tt);
+        return document.getElementById('canvas').toDataURL('image/png');
+      }, t);
+      const file = join(stills.dir, `t${t.toFixed(2).padStart(6, '0')}.png`);
+      writeFileSync(file, Buffer.from(data.split(',')[1], 'base64'));
+    }
+    console.log(`${stills.times.length} images → ${stills.dir}`);
   }
 
   if (args.includes('--sans-video')) throw Object.assign(new Error('fin'), { done: true });

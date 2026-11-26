@@ -2,6 +2,8 @@
 
 Raccordement de la chaîne TikTok **L'Énigme Vraie** (dossier `BUSINESS TIKTOK` : histoires vraies et étranges, verdict *prouvé / débattu / légende*, sources en commentaire épinglé) au moteur de motion design.
 
+Épisodes produits ici : **n°11** l'Homme au masque de fer (72 s), **n°12** l'explosion de la Toungouska (64,6 s). Programmation : [CALENDRIER.md](CALENDRIER.md).
+
 Les épisodes 01 à 10 ont été produits par l'ancien pipeline (`BUSINESS TIKTOK/OUTILS/PRODUIRE.bat`). À partir du **n°11**, l'image est produite par ce moteur : storyboard JSON déterministe, illustrations au trait animées, fiches « dossier », tampons de verdict, sous-titres mot à mot. La voix vient d'**ElevenLabs** (narrateur Paul K), avec edge-tts en secours.
 
 ## Production d'un épisode
@@ -57,11 +59,13 @@ La **narration** (`NARRATION` dans le fichier de l'épisode) est la référence 
 
 ## Écrire l'épisode suivant
 
-1. Copier `episodes/11_masque-de-fer.ts` en `episodes/12_<sujet>.ts` (sujet tiré de `BUSINESS TIKTOK/IDEES FUTURES/40_sujets_a_produire.md`).
-2. Réécrire `NARRATION` : environ 2,75 mots/s, **62–65 s** au total (Creator Rewards : plus d'une minute), un verdict final.
-3. Adapter les scènes : briques disponibles dans `charte.ts` (fiche papier, trait qui se dessine, Bastille, masques, halo, poussières, en-tête de marque) et composants du moteur (`stamp`, `captions`, `lower-third`, `title-card`…).
-4. Remplir `FICHE` (description, hashtags, commentaire des sources, points vérifiés).
-5. Lancer `PRODUIRE_EPISODE.bat 12_<sujet>`.
+1. Copier le dernier épisode (`episodes/12_toungouska.ts`) en `episodes/13_<sujet>.ts` (sujet tiré de `BUSINESS TIKTOK/IDEES FUTURES/40_sujets_a_produire.md`, sans reprendre un sujet déjà traité).
+2. Réécrire `NARRATION` : **≈ 155 mots** pour la voix Paul K à 1.15 (≈ 2,6 mots/s, les années comptent pour plusieurs mots) → 62–65 s au total (Creator Rewards : plus d'une minute), un verdict final.
+3. Adapter les scènes. `atelier(NARRATION, durée)` fournit le commun : `at(segment, mot)` (instant où le mot est prononcé), `sceneFor` (fond, halo, poussières, vignette), `verdictScene` (tableau + carte de fin), `captions`, `applyVoice`. Briques visuelles de `charte.ts` : fiche papier, machine à écrire, tampon, trait qui se dessine, sapins / forêt soufflée, Bastille, masques, en-tête de marque ; composants du moteur (`stamp`, `captions`, `lower-third`, `title-card`…). Attention : `at()` compare le début du mot normalisé (`d’arbres` → « darbres » : chercher `d’arbres`, pas `arbres`).
+4. Remplir la fiche (description, hashtags, commentaire des sources, points vérifiés).
+5. `npm run episode -- 13_<sujet>`, puis contrôle visuel rapide sans exporter :
+   `node scripts/render.mjs sortie/…/storyboard.json x.webm --sans-video --images 2,10,20,40 controle/`
+6. Lancer `PRODUIRE_EPISODE.bat 13_<sujet>` et l'ajouter à [CALENDRIER.md](CALENDRIER.md).
 
 ## Charte
 

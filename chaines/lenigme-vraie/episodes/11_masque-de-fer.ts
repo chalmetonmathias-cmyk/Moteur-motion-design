@@ -8,15 +8,13 @@
  * avec son segment, et les sous-titres comme les tampons sont calés sur
  * l'instant où le mot est prononcé (`wordTime`).
  */
-import type { LayerInput, SceneInput, TransitionInput } from '../../../src/types/storyboard.ts';
+import type { LayerInput, SceneInput } from '../../../src/types/storyboard.ts';
 import {
-  CAPTION_Y, CX, F, P, W, alpha, bastilleD, drawn, dust, episode, eyesD, glow, gradient, header, ironOutline, kf, paper, sceneBackground, velvetOutline, vignette, wordTime,
+  CX, F, P, W, X, alpha, atelier, bastilleD, drawn, episode, eyesD, gradient, header, ironOutline, kf, paper, stampAt, typewriter, velvetOutline,
   type Segment,
 } from '../charte.ts';
 
 export const ID = '11_masque-de-fer';
-/** Durée totale (s) ; recalculée par `applyVoice` quand la vraie voix est disponible. */
-export let TOTAL = 65;
 
 /* ───────────── Narration (≈ 2,75 mots/s, voix française) ───────────── */
 export const NARRATION: Segment[] = [
@@ -30,73 +28,13 @@ export const NARRATION: Segment[] = [
   { id: 'verdict', start: 54.9, end: 63.6, text: 'Le prisonnier masqué : *prouvé*. Le masque de fer et le jumeau du roi : *légende*. Son identité : toujours *débattue*. Et toi, ton hypothèse ?' },
 ];
 
-/** Créneaux prévus (minutage estimé, utilisé tant que la vraie voix n'est pas générée). */
-const PLANNED = NARRATION.map((s) => s.end - s.start);
-
-/**
- * Recale l'épisode sur la vraie voix (alignement ElevenLabs) : chaque segment
- * dure le temps de sa voix + 0,3 s de respiration, et ses mots prennent leurs
- * instants réels (sous-titres, tampons et transitions tombent sur la voix).
- */
-export function applyVoice(al: { segments: { id: string; duree: number; mots: { mot: string; t: number }[] }[] }): void {
-  let t = 0;
-  NARRATION.forEach((s, k) => {
-    const v = al.segments.find((x) => x.id === s.id);
-    const dur = v ? Math.max(2, v.duree + 0.3) : PLANNED[k]!;
-    s.start = +t.toFixed(3);
-    s.end = +(t + dur).toFixed(3);
-    t += dur;
-    const nWords = s.text.split(/\s+/).filter(Boolean).length;
-    s.times = v && v.mots.length === nWords ? v.mots.map((m) => m.t) : undefined;
-  });
-  // Creator Rewards : jamais moins de 61 s (on allonge la carte de fin si besoin).
-  TOTAL = +Math.max(t + 1.4, 61).toFixed(3); // carte de fin après la dernière phrase
-}
-
-const seg = (id: string) => NARRATION.find((s) => s.id === id)!;
-/** Instant LOCAL (relatif au début de la scène) où un mot est prononcé. */
-const at = (id: string, word: string) => +(wordTime(seg(id), word) - seg(id).start).toFixed(2);
-
-/** Repères audio pour la musique et les bruitages (temps absolus). */
-export const AUDIO_CUES: { t: number; type: 'whoosh' | 'stamp' | 'tick-start' | 'tick-stop' | 'riser' | 'hit' | 'seal' }[] = [];
+/** Durée prévue 65 s ; recalculée par `applyVoice` quand la vraie voix est disponible. */
+const A = atelier(NARRATION, 65);
+export const applyVoice = A.applyVoice;
+const { seg, at, sceneFor } = A;
+const AUDIO_CUES = A.cues;
 
 /* ───────────── Scènes ───────────── */
-
-const X = 0.3; // chevauchement des transitions
-function sceneFor(id: string, layers: LayerInput[], out?: TransitionInput, endAt?: number): SceneInput {
-  const s = seg(id);
-  const i = NARRATION.indexOf(s);
-  const next = NARRATION[i + 1];
-  const end = endAt ?? (next ? next.start + (out ? X : 0) : TOTAL);
-  if (out && next) AUDIO_CUES.push({ t: next.start, type: 'whoosh' });
-  return {
-    id,
-    start: s.start,
-    duration: +(end - s.start).toFixed(3),
-    background: sceneBackground,
-    ...(out ? { transitionOut: out } : {}),
-    layers: [glow(`${id}-glow`, CX, 820, 620, end - s.start), dust(`${id}-dust`, end - s.start, i + 3), ...layers, vignette()],
-  };
-}
-
-const typewriter = (id: string, content: string, x: number, y: number, size: number, t0: number, o: Partial<{ color: string; maxWidth: number; stagger: number; align: 'left' | 'center' }> = {}): LayerInput => ({
-  type: 'text',
-  id,
-  content,
-  font: F.typewriter,
-  size,
-  weight: 400,
-  color: o.color ?? P.ink,
-  align: o.align ?? 'left',
-  anchor: { x, y },
-  maxWidth: o.maxWidth ?? 700,
-  lineHeight: 1.35,
-  split: { mode: 'typewriter', start: t0, stagger: o.stagger ?? 0.03, cursor: false },
-});
-
-const stampAt = (id: string, text: string, t: number, x: number, y: number, color: string, o: { size?: number; rotate?: number; sub?: string } = {}): LayerInput => {
-  return { type: 'component', ref: 'stamp', id, start: t, props: { text, x, y, color, size: o.size ?? 80, rotate: o.rotate ?? -9, font: F.typewriter, weight: 400, ...(o.sub ? { sub: o.sub } : {}) } };
-};
 
 function sceneAccroche(): SceneInput {
   return sceneFor('accroche', [
@@ -438,47 +376,11 @@ function sceneIdentite(): SceneInput {
 }
 
 function sceneVerdict(): SceneInput {
-  const s = 'verdict';
-  const rows = [
-    { label: 'Le prisonnier masqué', stamp: 'PROUVÉ', color: P.prouve, t: at(s, 'prouvé') },
-    { label: 'Masque de fer, jumeau du roi', stamp: 'LÉGENDE', color: P.legende, t: at(s, 'légende') },
-    { label: 'Son identité', stamp: 'DÉBATTU', color: P.debattu, t: at(s, 'débattue') },
-  ];
-  rows.forEach((r) => AUDIO_CUES.push({ t: seg(s).start + r.t, type: 'stamp' }));
-  const tEnd = seg(s).end - seg(s).start; // fin de la narration (local)
-  AUDIO_CUES.push({ t: seg(s).end, type: 'hit' });
-  const layers: LayerInput[] = [
-    {
-      type: 'group',
-      id: 'verdict-tableau',
-      keyframes: [kf(tEnd - 0.2, { opacity: 1, scale: 1 }), kf(tEnd + 0.3, { opacity: 0, scale: 0.94, easing: 'ease-in' })],
-      pivot: { x: CX, y: 800 },
-      layers: [
-        { type: 'text', id: 'verdict-titre', content: 'LE VERDICT', font: F.title, size: 96, weight: 900, letterSpacing: 6, color: gradient(180, [P.goldLight, 0], [P.gold, 1]), anchor: { x: CX, y: 450 }, keyframes: [kf(0, { scale: 1.6, opacity: 0 }), kf(0.45, { scale: 1, opacity: 1, easing: 'back(1.8)' })] },
-        drawn('verdict-regle', `M240,530 H${W - 240}`, 0.3, 0.6, { width: 3 }),
-        ...rows.flatMap((r, k): LayerInput[] => {
-          const y = 660 + k * 190;
-          return [
-            { type: 'text', id: `verdict-label-${k}`, content: r.label, font: F.ui, size: 40, weight: 700, align: 'left', anchor: { x: 120, y }, maxWidth: 470, keyframes: [kf(r.t - 0.8, { opacity: 0, x: -30 }), kf(r.t - 0.3, { opacity: 1, x: 0, easing: 'ease-out' })] },
-            stampAt(`verdict-stamp-${k}`, r.stamp, r.t, 790, y, r.color, { size: 64, rotate: k === 1 ? 7 : -8 }),
-          ];
-        }),
-      ],
-    },
-    // Carte de fin : logo + appel aux commentaires.
-    {
-      type: 'group',
-      id: 'fin',
-      pivot: { x: CX, y: 820 },
-      keyframes: [kf(tEnd + 0.1, { scale: 0.6, opacity: 0 }), kf(tEnd + 0.7, { scale: 1, opacity: 1, easing: 'spring(200,13)' })],
-      layers: [
-        { type: 'image', id: 'fin-logo', src: '@logo', width: 240, anchor: { x: CX, y: 740 } },
-        { type: 'text', id: 'fin-nom', content: 'L’ÉNIGME VRAIE', font: F.title, size: 70, weight: 900, color: P.gold, letterSpacing: 4, anchor: { x: CX, y: 940 } },
-        { type: 'text', id: 'fin-cta', content: 'Ton hypothèse ? *En commentaire.*', font: F.ui, size: 44, weight: 700, highlight: P.goldLight, anchor: { x: CX, y: 1030 } },
-      ],
-    },
-  ];
-  return sceneFor(s, layers, undefined, TOTAL);
+  return A.verdictScene('verdict', [
+    { label: 'Le prisonnier masqué', stamp: 'PROUVÉ', word: 'prouvé' },
+    { label: 'Masque de fer, jumeau du roi', stamp: 'LÉGENDE', word: 'légende' },
+    { label: 'Son identité', stamp: 'DÉBATTU', word: 'débattue' },
+  ]);
 }
 
 /* ───────────── Storyboard final ───────────── */
@@ -486,23 +388,15 @@ function sceneVerdict(): SceneInput {
 export function build() {
   AUDIO_CUES.length = 0;
   const scenes = [sceneAccroche(), sceneLettre(), scenePrisons(), sceneJournal(), sceneLegende(), sceneEnterrement(), sceneIdentite(), sceneVerdict()];
-  const captions: LayerInput[] = NARRATION.map((s) => ({
-    type: 'component',
-    ref: 'captions',
-    id: `sous-titres-${s.id}`,
-    start: s.start,
-    props: { text: s.text, duration: +(s.end - s.start).toFixed(3), y: CAPTION_Y, size: 60, font: F.ui, highlight: '$gold', wordsPerChunk: 4, ...(s.times ? { wordTimes: s.times.join(',') } : {}) },
-  }));
-  const storyboard = episode('L’Énigme Vraie — 11 · Le masque de fer', scenes, [...header('DOSSIER N°11 · LE MASQUE DE FER', TOTAL), ...captions]);
-  return { storyboard, narration: NARRATION, cues: [...AUDIO_CUES].sort((a, b) => a.t - b.t) };
+  const storyboard = episode('L’Énigme Vraie — 11 · Le masque de fer', scenes, [...header('DOSSIER N°11 · LE MASQUE DE FER', A.total), ...A.captions()]);
+  return { storyboard, narration: NARRATION, cues: A.sortedCues(), total: A.total };
 }
-
 
 /* ───────────── Fiche de publication (même format que BUSINESS TIKTOK/SCRIPTS) ───────────── */
 export const fiche = () => `# 11 — L'Homme au masque de fer
 
 - **Titre (couverture)** : Le prisonnier sans visage
-- **Durée** : ${TOTAL} s (> 60 s : éligible Creator Rewards)
+- **Durée** : ${A.total} s (> 60 s : éligible Creator Rewards)
 - **Verdict** : prisonnier masqué → PROUVÉ · masque de fer / jumeau du roi → LÉGENDE · identité → DÉBATTU
 - **Production** : moteur de motion design (storyboard.json) + voix de synthèse (audio/ajouter_voix.py) + musique originale (audio/musique.py)
 
