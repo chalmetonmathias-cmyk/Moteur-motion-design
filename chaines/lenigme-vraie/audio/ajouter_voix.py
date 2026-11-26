@@ -63,10 +63,16 @@ async def tts(text, voice, rate, path):
     await edge_tts.Communicate(text, voice, rate=f"{rate:+d}%").save(str(path))
 
 
-def make_voice(seg, voice, tmp, k, test):
+def make_voice(seg, voice, tmp, k, test, voix_dir=None):
     """Fabrique la voix d'un segment et garantit qu'elle tient dans son créneau."""
     slot = seg["end"] - seg["start"] - 0.15  # petite respiration avant la scène suivante
     out = tmp / f"voix_{k:02d}.wav"
+    if voix_dir:
+        raw = voix_dir / f"segment_{k:02d}.mp3"
+        d = duration(raw)
+        tempo = d / slot if d > slot else 1.0
+        run([FFMPEG, "-y", "-i", str(raw), "-af", f"atempo={min(tempo, 1.25):.4f}" if tempo > 1.0 else "anull", "-ar", "44100", "-ac", "1", str(out)])
+        return out, duration(out), 0
     if test:
         run([FFMPEG, "-y", "-f", "lavfi", "-i", f"sine=frequency={330 + 40 * k}:duration={slot * 0.9:.3f}", "-af", "afade=t=in:d=0.05,afade=t=out:st={:.3f}:d=0.1,volume=0.5".format(slot * 0.9 - 0.1), "-ar", "44100", "-ac", "1", str(out)])
         return out, slot * 0.9, 0
@@ -91,6 +97,7 @@ def main():
     ap.add_argument("--musique", type=Path, required=True)
     ap.add_argument("--sortie", type=Path, required=True)
     ap.add_argument("--voix", default="fr-FR-HenriNeural")
+    ap.add_argument("--voix-dir", type=Path, help="voix déjà générées (segment_NN.mp3, ex. ElevenLabs)")
     ap.add_argument("--web", action="store_true")
     ap.add_argument("--sans-voix", action="store_true")
     ap.add_argument("--test-bips", action="store_true")
@@ -106,7 +113,7 @@ def main():
         filters.append("[1:a]loudnorm=I=-14:TP=-1.5:LRA=11[aout]")
     else:
         for k, seg in enumerate(segments):
-            path, d, rate = make_voice(seg, a.voix, tmp, k, a.test_bips)
+            path, d, rate = make_voice(seg, a.voix, tmp, k, a.test_bips, a.voix_dir)
             flag = f" (débit {rate:+d} %)" if rate else ""
             print(f"  voix {k + 1:02d}/{len(segments)} : {d:5.2f} s pour un créneau de {seg['end'] - seg['start']:.2f} s{flag}")
             inputs += ["-i", str(path)]

@@ -30,3 +30,6 @@ exports/
 chaines/*/sortie/*/*.webm
 chaines/*/sortie/*/*.mp4
 chaines/*/sortie/*/*.wav
+
+# Voix générées (ElevenLabs / edge-tts) : régénérables ; alignement.json reste versionné
+chaines/*/sortie/*/voix/*.mp3

@@ -50,11 +50,13 @@ export interface Segment {
   end: number;
   /** Texte dit par la voix ; `*mot*` = mot surligné dans les sous-titres. */
   text: string;
+  /** Instants réels des mots (s, relatifs au segment), issus de l'alignement de la voix. */
+  times?: number[];
 }
 
 /** Instant (s, absolu) où un mot de la narration est prononcé — pour synchroniser l'image. */
 export function wordTime(seg: Segment, needle: string): number {
-  const words = timeWords(seg.text, seg.end - seg.start);
+  const words = timeWords(seg.text, seg.end - seg.start, seg.times);
   const norm = (v: string) => v.toLowerCase().replace(/[^\p{L}\d]/gu, '');
   const w = words.find((x) => norm(x.word).startsWith(norm(needle)));
   if (!w) throw new Error(`mot « ${needle} » introuvable dans le segment ${seg.id}`);

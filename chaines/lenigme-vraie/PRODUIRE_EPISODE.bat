@@ -9,6 +9,10 @@ rem    npm install
 rem    npm i -D playwright  puis  npx playwright install chromium
 rem    pip install edge-tts numpy
 rem
+rem  Voix ElevenLabs (recommande) : definir ELEVENLABS_API_KEY (votre cle sk_...)
+rem  et eventuellement VOIX_ELEVENLABS (defaut : Paul K, narrateur francais grave).
+rem  Sans cle : voix edge-tts.
+rem
 rem  Optionnel : definir BUSINESS_TIKTOK pour ranger automatiquement les
 rem  fichiers dans le dossier du business, par exemple :
 rem    set BUSINESS_TIKTOK=C:\chemin\vers\BUSINESS TIKTOK
@@ -19,8 +23,18 @@ if "%EP%"=="" set EP=11_masque-de-fer
 cd /d "%~dp0\..\.."
 set SORTIE=chaines\lenigme-vraie\sortie\%EP%
 
+if not defined VOIX_ELEVENLABS set VOIX_ELEVENLABS=5l4ttmr4SKNgi0HnOelT
+set VOIXOPT=
+
 echo [1/4] Storyboard, narration et fiche...
 call npm run episode -- %EP% || goto :erreur
+
+if defined ELEVENLABS_API_KEY (
+  echo [voix] ElevenLabs, puis recalage du storyboard sur la vraie voix...
+  python chaines\lenigme-vraie\audio\voix_elevenlabs.py "%SORTIE%" --voice-id %VOIX_ELEVENLABS% --vitesse 1.15 || goto :erreur
+  call npm run episode -- %EP% || goto :erreur
+  set VOIXOPT=--voix-dir "%SORTIE%\voix"
+)
 
 echo [2/4] Rendu video avec le moteur (mode Auto, aucune image perdue)...
 node scripts\render.mjs "%SORTIE%\storyboard.json" "%SORTIE%\video.webm" --miniature 5.0 "%SORTIE%\miniature.jpg" || goto :erreur
@@ -29,7 +43,7 @@ echo [3/4] Musique originale et bruitages...
 python chaines\lenigme-vraie\audio\musique.py "%SORTIE%" "%SORTIE%\musique.wav" || goto :erreur
 
 echo [4/4] Voix, mixage et versions finales...
-python chaines\lenigme-vraie\audio\ajouter_voix.py "%SORTIE%" --video "%SORTIE%\video.webm" --musique "%SORTIE%\musique.wav" --sortie "%SORTIE%\%EP%.mp4" --web || goto :erreur
+python chaines\lenigme-vraie\audio\ajouter_voix.py "%SORTIE%" --video "%SORTIE%\video.webm" --musique "%SORTIE%\musique.wav" --sortie "%SORTIE%\%EP%.mp4" --web %VOIXOPT% || goto :erreur
 
 if defined BUSINESS_TIKTOK (
   echo Rangement dans "%BUSINESS_TIKTOK%"...

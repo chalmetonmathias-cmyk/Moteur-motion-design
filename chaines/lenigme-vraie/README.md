@@ -2,7 +2,7 @@
 
 Raccordement de la chaîne TikTok **L'Énigme Vraie** (dossier `BUSINESS TIKTOK` : histoires vraies et étranges, verdict *prouvé / débattu / légende*, sources en commentaire épinglé) au moteur de motion design.
 
-Les épisodes 01 à 10 ont été produits par l'ancien pipeline (`BUSINESS TIKTOK/OUTILS/PRODUIRE.bat`). À partir du **n°11**, l'image est produite par ce moteur : storyboard JSON déterministe, illustrations au trait animées, fiches « dossier », tampons de verdict, sous-titres mot à mot. La voix reste la même (edge-tts).
+Les épisodes 01 à 10 ont été produits par l'ancien pipeline (`BUSINESS TIKTOK/OUTILS/PRODUIRE.bat`). À partir du **n°11**, l'image est produite par ce moteur : storyboard JSON déterministe, illustrations au trait animées, fiches « dossier », tampons de verdict, sous-titres mot à mot. La voix vient d'**ElevenLabs** (narrateur Paul K), avec edge-tts en secours.
 
 ## Production d'un épisode
 
@@ -28,7 +28,24 @@ chaines\lenigme-vraie\PRODUIRE_EPISODE.bat 11_masque-de-fer
 
 Mac / Linux : `BUSINESS_TIKTOK=… ./chaines/lenigme-vraie/produire-episode.sh 11_masque-de-fer`.
 
-Prérequis (une fois) : Node ≥ 22, Python 3, FFmpeg, puis `npm install`, `npm i -D playwright`, `npx playwright install chromium`, `pip install edge-tts numpy`.
+Prérequis (une fois) : Node ≥ 22, Python 3, FFmpeg, puis `npm install`, `npm i -D playwright`, `npx playwright install chromium`, `pip install edge-tts numpy`. Pour la voix ElevenLabs : `set ELEVENLABS_API_KEY=sk_…` avant de lancer le `.bat`.
+
+## Voix : ElevenLabs (recommandé) ou edge-tts
+
+**ElevenLabs** — voix française naturelle, et surtout l'instant exact de chaque mot :
+
+```bash
+python chaines/lenigme-vraie/audio/voix_elevenlabs.py --liste-voix                 # voix du compte
+python chaines/lenigme-vraie/audio/voix_elevenlabs.py chaines/lenigme-vraie/sortie/11_masque-de-fer \
+       --voice-id 5l4ttmr4SKNgi0HnOelT --vitesse 1.15                                # Paul K, narrateur grave
+npm run episode -- 11_masque-de-fer     # ↻ recale tout l'épisode sur la vraie voix
+```
+
+`voix/alignement.json` donne la durée de chaque segment et l'instant de chaque mot : `build.ts` le lit automatiquement, chaque segment dure alors le temps de sa voix (+ 0,3 s), et sous-titres, tampons et transitions tombent **sur le mot prononcé**. Le mixage utilise ensuite ces fichiers (`ajouter_voix.py --voix-dir …/voix`). Avec `PRODUIRE_EPISODE.bat`, il suffit de définir `ELEVENLABS_API_KEY` (et `VOIX_ELEVENLABS` pour changer de voix). Coût : ≈ 1 100 caractères par épisode.
+
+Voix françaises du compte : Paul K (grave, choisie pour le n°11), Guillaume (narrateur), Christian Page (conteur), Martin Dupont (grave et chaleureuse).
+
+**edge-tts** (sans clé) : voix de synthèse Microsoft, posée dans les créneaux estimés (débit ajusté pour ne jamais déborder).
 
 ## Comment la synchronisation est garantie
 
@@ -36,7 +53,7 @@ La **narration** (`NARRATION` dans le fichier de l'épisode) est la référence 
 
 - Les **sous-titres** (`captions`) répartissent les mots sur le créneau, proportionnellement à leur longueur, avec une pause après la ponctuation.
 - Les **tampons et animations** sont calés sur l'instant où un mot est prononcé (`wordTime(segment, 'mot')`).
-- La **voix** (`ajouter_voix.py`) est synthétisée segment par segment. Si elle déborde de son créneau, son débit est augmenté (jusqu'à +40 %), puis elle est légèrement accélérée : elle ne déborde jamais.
+- La **voix** : avec ElevenLabs, c'est elle qui fixe le minutage (alignement mot à mot). Avec edge-tts, elle est synthétisée segment par segment ; si elle déborde de son créneau, son débit est augmenté (jusqu'à +40 %), puis elle est légèrement accélérée : elle ne déborde jamais.
 
 ## Écrire l'épisode suivant
 
@@ -63,5 +80,6 @@ La **narration** (`NARRATION` dans le fichier de l'épisode) est la référence 
 
 ## Limites
 
-- La voix ne peut pas être produite dans un environnement cloud sans accès au service vocal de Microsoft. Elle se fait sur le PC, comme pour les épisodes 01–10.
-- Le rendu se fait en temps réel ou plus lentement (mode Auto) : compter environ 2 à 3 min par épisode de 65 s, plus le mixage.
+- edge-tts ne fonctionne pas dans un environnement cloud (service vocal de Microsoft inaccessible) : sans clé ElevenLabs, la voix se fait sur le PC.
+- Dans une session Claude Code cloud, la clé ElevenLabs est un *secret réseau* de l'environnement (hôte `api.elevenlabs.io`, en-tête `xi-api-key`) : le proxy l'injecte, elle n'apparaît jamais dans les fichiers.
+- Le rendu se fait en temps réel ou plus lentement (mode Auto) : compter environ 2 à 3 min par épisode d'une minute, plus le mixage.

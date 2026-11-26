@@ -1,27 +1,27 @@
 # 11 — L'Homme au masque de fer
 
 - **Titre (couverture)** : Le prisonnier sans visage
-- **Durée** : 65 s (> 60 s : éligible Creator Rewards)
+- **Durée** : 72.113 s (> 60 s : éligible Creator Rewards)
 - **Verdict** : prisonnier masqué → PROUVÉ · masque de fer / jumeau du roi → LÉGENDE · identité → DÉBATTU
 - **Production** : moteur de motion design (storyboard.json) + voix de synthèse (audio/ajouter_voix.py) + musique originale (audio/musique.py)
 
 ## Script (voix)
 
-**[0.0–5.2 s]** Novembre 1703. Un prisonnier meurt à la Bastille. Personne n’a jamais vu son visage.
+**[0.0–7.4 s]** Novembre 1703. Un prisonnier meurt à la Bastille. Personne n’a jamais vu son visage.
 
-**[5.2–14.4 s]** Trente-quatre ans plus tôt, en juillet 1669, le ministre Louvois écrit à son geôlier : s’il parle d’autre chose que de ses besoins, menacez-le de mort.
+**[7.4–17.7 s]** Trente-quatre ans plus tôt, en juillet 1669, le ministre Louvois écrit à son geôlier : s’il parle d’autre chose que de ses besoins, menacez-le de mort.
 
-**[14.4–22.0 s]** Le nom inscrit dans les lettres : Eustache Dauger. Pignerol, Exilles, l’île Sainte-Marguerite, puis la Bastille. Toujours le même geôlier : Saint-Mars.
+**[17.7–27.7 s]** Le nom inscrit dans les lettres : Eustache Dauger. Pignerol, Exilles, l’île Sainte-Marguerite, puis la Bastille. Toujours le même geôlier : Saint-Mars.
 
-**[22.0–29.4 s]** À la Bastille, un officier tient un journal. Il y décrit un prisonnier toujours masqué… d’un masque de velours noir.
+**[27.7–35.7 s]** À la Bastille, un officier tient un journal. Il y décrit un prisonnier toujours masqué… d’un masque de velours noir.
 
-**[29.4–39.2 s]** Le masque de fer ? Il apparaît un demi-siècle plus tard, sous la plume de Voltaire. Puis Alexandre Dumas en fait le frère jumeau de Louis XIV.
+**[35.7–45.0 s]** Le masque de fer ? Il apparaît un demi-siècle plus tard, sous la plume de Voltaire. Puis Alexandre Dumas en fait le frère jumeau de Louis XIV.
 
-**[39.2–45.4 s]** Le 20 novembre 1703, on l’enterre sous un faux nom : Marchioly. Même mort, il reste un secret.
+**[45.0–52.2 s]** Le 20 novembre 1703, on l’enterre sous un faux nom : Marchioly. Même mort, il reste un secret.
 
-**[45.4–54.9 s]** Alors, qui était-il ? Pour la plupart des historiens, un simple valet, Eustache Dauger, qui en savait sans doute trop. Mais quoi ? Personne ne le sait.
+**[52.2–61.3 s]** Alors, qui était-il ? Pour la plupart des historiens, un simple valet, Eustache Dauger, qui en savait sans doute trop. Mais quoi ? Personne ne le sait.
 
-**[54.9–63.6 s]** Le prisonnier masqué : prouvé. Le masque de fer et le jumeau du roi : légende. Son identité : toujours débattue. Et toi, ton hypothèse ?
+**[61.3–70.7 s]** Le prisonnier masqué : prouvé. Le masque de fer et le jumeau du roi : légende. Son identité : toujours débattue. Et toi, ton hypothèse ?
 
 ## Description
 

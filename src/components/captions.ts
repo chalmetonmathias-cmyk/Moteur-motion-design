@@ -29,8 +29,12 @@ function weight(w: string): number {
   return Math.max(2, w.length) + p;
 }
 
-/** Minutage des mots d'une narration sur `duration` secondes (exporté pour la voix). */
-export function timeWords(text: string, duration: number): TimedWord[] {
+/**
+ * Minutage des mots d'une narration sur `duration` secondes (exporté pour la voix).
+ * `times` : instants réels de chaque mot (ex. alignement renvoyé par une synthèse
+ * vocale) ; utilisés tels quels s'il y en a autant que de mots.
+ */
+export function timeWords(text: string, duration: number, times?: number[]): TimedWord[] {
   const raw = text.split(/\s+/).filter(Boolean);
   let on = false;
   const words = raw.map((w) => {
@@ -40,6 +44,7 @@ export function timeWords(text: string, duration: number): TimedWord[] {
     if (w.replace(/[.,;:!?…»"]+$/, '').endsWith('*')) on = false;
     return { word: w.replace(/\*/g, ''), highlight: hl };
   });
+  if (times && times.length === words.length) return words.map((w, i) => ({ ...w, t: Math.max(0, Math.min(duration, times[i]!)) }));
   const total = words.reduce((a, w) => a + weight(w.word), 0) || 1;
   let acc = 0;
   return words.map((w) => {
@@ -55,6 +60,7 @@ export const captions: ComponentDefinition = {
   props: {
     text: { type: 'string', required: true, description: 'Texte de la narration. `*mot*` = mot surligné.' },
     duration: { type: 'number', required: true, min: 0.2, description: 'Durée de la narration (s).' },
+    wordTimes: { type: 'string', description: 'Instants réels des mots, séparés par des virgules (alignement de la voix). Sinon : minutage estimé.' },
     wordsPerChunk: { type: 'number', default: 4, min: 1, max: 12, description: 'Nombre max de mots affichés ensemble.' },
     y: { type: 'number', description: 'Centre vertical (défaut : au-dessus de la safe-area basse).' },
     size: { type: 'number', default: 62, min: 8, description: 'Taille (px).' },
@@ -71,7 +77,8 @@ export const captions: ComponentDefinition = {
     const per = Math.round(num(p.wordsPerChunk, 4));
     const size = num(p.size, 62);
     const y = num(p.y, ctx.height - ctx.safeArea.bottom - 230);
-    const words = timeWords(str(p.text), duration);
+    const times = str(p.wordTimes) ? str(p.wordTimes).split(',').map(Number) : undefined;
+    const words = timeWords(str(p.text), duration, times?.every(Number.isFinite) ? times : undefined);
 
     // Découpage en morceaux : ≤ per mots, coupure après une fin de phrase.
     const chunks: TimedWord[][] = [];

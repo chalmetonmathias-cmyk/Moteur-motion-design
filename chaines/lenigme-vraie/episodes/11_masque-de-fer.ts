@@ -15,7 +15,8 @@ import {
 } from '../charte.ts';
 
 export const ID = '11_masque-de-fer';
-export const TOTAL = 65;
+/** Durée totale (s) ; recalculée par `applyVoice` quand la vraie voix est disponible. */
+export let TOTAL = 65;
 
 /* ───────────── Narration (≈ 2,75 mots/s, voix française) ───────────── */
 export const NARRATION: Segment[] = [
@@ -28,6 +29,29 @@ export const NARRATION: Segment[] = [
   { id: 'identite', start: 45.4, end: 54.9, text: 'Alors, qui était-il ? Pour la plupart des historiens, *un simple valet*, Eustache Dauger, qui en savait sans doute trop. Mais quoi ? Personne ne le sait.' },
   { id: 'verdict', start: 54.9, end: 63.6, text: 'Le prisonnier masqué : *prouvé*. Le masque de fer et le jumeau du roi : *légende*. Son identité : toujours *débattue*. Et toi, ton hypothèse ?' },
 ];
+
+/** Créneaux prévus (minutage estimé, utilisé tant que la vraie voix n'est pas générée). */
+const PLANNED = NARRATION.map((s) => s.end - s.start);
+
+/**
+ * Recale l'épisode sur la vraie voix (alignement ElevenLabs) : chaque segment
+ * dure le temps de sa voix + 0,3 s de respiration, et ses mots prennent leurs
+ * instants réels (sous-titres, tampons et transitions tombent sur la voix).
+ */
+export function applyVoice(al: { segments: { id: string; duree: number; mots: { mot: string; t: number }[] }[] }): void {
+  let t = 0;
+  NARRATION.forEach((s, k) => {
+    const v = al.segments.find((x) => x.id === s.id);
+    const dur = v ? Math.max(2, v.duree + 0.3) : PLANNED[k]!;
+    s.start = +t.toFixed(3);
+    s.end = +(t + dur).toFixed(3);
+    t += dur;
+    const nWords = s.text.split(/\s+/).filter(Boolean).length;
+    s.times = v && v.mots.length === nWords ? v.mots.map((m) => m.t) : undefined;
+  });
+  // Creator Rewards : jamais moins de 61 s (on allonge la carte de fin si besoin).
+  TOTAL = +Math.max(t + 1.4, 61).toFixed(3); // carte de fin après la dernière phrase
+}
 
 const seg = (id: string) => NARRATION.find((s) => s.id === id)!;
 /** Instant LOCAL (relatif au début de la scène) où un mot est prononcé. */
@@ -467,7 +491,7 @@ export function build() {
     ref: 'captions',
     id: `sous-titres-${s.id}`,
     start: s.start,
-    props: { text: s.text, duration: +(s.end - s.start).toFixed(3), y: CAPTION_Y, size: 60, font: F.ui, highlight: '$gold', wordsPerChunk: 4 },
+    props: { text: s.text, duration: +(s.end - s.start).toFixed(3), y: CAPTION_Y, size: 60, font: F.ui, highlight: '$gold', wordsPerChunk: 4, ...(s.times ? { wordTimes: s.times.join(',') } : {}) },
   }));
   const storyboard = episode('L’Énigme Vraie — 11 · Le masque de fer', scenes, [...header('DOSSIER N°11 · LE MASQUE DE FER', TOTAL), ...captions]);
   return { storyboard, narration: NARRATION, cues: [...AUDIO_CUES].sort((a, b) => a.t - b.t) };
@@ -475,7 +499,7 @@ export function build() {
 
 
 /* ───────────── Fiche de publication (même format que BUSINESS TIKTOK/SCRIPTS) ───────────── */
-export const FICHE = `# 11 — L'Homme au masque de fer
+export const fiche = () => `# 11 — L'Homme au masque de fer
 
 - **Titre (couverture)** : Le prisonnier sans visage
 - **Durée** : ${TOTAL} s (> 60 s : éligible Creator Rewards)
