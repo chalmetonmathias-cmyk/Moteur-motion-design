@@ -4,5 +4,5 @@
     "types": ["node"],
     "lib": ["ES2023", "DOM"]
   },
-  "include": ["scripts", "tests"]
+  "include": ["scripts", "tests", "chaines"]
 }

@@ -12,21 +12,30 @@ Les 9 étapes du cahier des charges sont livrées :
 4. Renderer Canvas 2D (`renderer.ts`) + modules `path.ts`, `color.ts`, `text-layout.ts`, `transitions.ts`, `runtime.ts`, `assets.ts`.
 5. Scene manager + player UI (`src/player/controls.ts`, `src/main.ts`).
 6. Exporter (`src/player/exporter.ts`) : MediaRecorder + `captureStream(0)` + `requestFrame`, retiming des horodatages WebM, injection de la durée, **mode Auto** (calibrage + garantie sans perte).
-7. Composants : `title-card`, `lower-third`, `logo-reveal` (+ registre).
+7. Composants : `title-card`, `lower-third`, `logo-reveal`, `captions` (sous-titres mot à mot), `stamp` (tampon) + registre.
 8. 9 exemples (`src/examples/*.json`) : 3 courts ≤ 45 s, 6 longs 60–75 s.
 9. README complet + docs (`docs/preview.png`, `docs/frames.png`).
 
 Vérification bout-en-bout faite dans Chromium (conteneur sans GPU) : les 9 exemples se chargent sans diagnostic, rendu déterministe (hash de pixels), export 60 fps sans perte (1 frame manquante sur 34 950 au total, `long-06` à 38,67 s). Résultats détaillés dans `README.md` §9.
+
+## Chaîne raccordée : L'Énigme Vraie (26/11/2026)
+
+- Le business TikTok de l'utilisateur (session Claude Code « Business TikTok automatisé », dossier `BUSINESS TIKTOK` sur son PC Windows) : chaîne **L'Énigme Vraie**, histoires vraies et étranges, verdict PROUVÉ / DÉBATTU / LÉGENDE, sources en commentaire épinglé, 62–65 s (Creator Rewards > 1 min), étiquette « Contenu généré par IA ». Épisodes 01–10 (Mary Celeste → Yamaguchi) produits par l'ancien pipeline et programmés du 25/11 au 04/12 à 19 h.
+- À partir du n°11, l'image vient de ce moteur : `chaines/lenigme-vraie/` (charte, épisodes, `build.ts`, `audio/musique.py`, `audio/ajouter_voix.py`, `PRODUIRE_EPISODE.bat`). Voir `chaines/lenigme-vraie/README.md`.
+- **n°11 « l'Homme au masque de fer »** : produit et vérifié (65 s, 3900 frames, 0 perdue) ; **la voix reste à poser sur le PC** (edge-tts est bloqué dans le cloud : `ajouter_voix.py` le fait, calé sur les créneaux de `narration.json`).
+- Sujets suivants : `BUSINESS TIKTOK/IDEES FUTURES/40_sujets_a_produire.md` (sur le PC, non accessible depuis le cloud tant que le dossier n'est pas partagé).
 
 ## Commandes
 
 ```bash
 npm install
 npm run dev          # http://localhost:5173 (?example=long-06-manifesto pour ouvrir un exemple)
-npm test             # 27 tests node:test (parser, moteur, exporter, cahier des charges des exemples)
+npm test             # 29 tests node:test (parser, moteur, exporter, cahier des charges des exemples)
 npm run typecheck    # app + tests/scripts
 npm run build        # typecheck + build de production
 npm run examples     # régénère src/examples/*.json depuis scripts/examples/*.ts (ÉCRASE les JSON)
+npm run episode -- 11_masque-de-fer   # fichiers d'un épisode de L'Énigme Vraie
+npm run render -- <storyboard.json> <sortie.webm> [--miniature 5 m.jpg] [--sans-video]   # rendu sans interface
 ```
 
 Vérification navigateur optionnelle (nécessite Playwright installé, serveur de dev lancé) :

@@ -25,3 +25,8 @@ dist-ssr
 
 # Exports vidéo de vérification
 exports/
+
+# Sorties lourdes des chaînes (vidéos, audio) : seuls storyboard, narration, fiche et miniature sont versionnés
+chaines/*/sortie/*/*.webm
+chaines/*/sortie/*/*.mp4
+chaines/*/sortie/*/*.wav

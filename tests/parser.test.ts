@@ -106,3 +106,31 @@ test('références de palette avec alpha et gradients', () => {
   assert.equal(p.fill.stops[0]!.color.a, 0.5);
   assert.equal(p.fill.angle, 180);
 });
+
+test('composant captions : morceaux mot à mot, minutage croissant, surlignage conservé', async () => {
+  const { timeWords } = await import('../src/components/captions.ts');
+  const words = timeWords('Un masque… de *velours noir*. Fin.', 4);
+  assert.equal(words[0]!.t, 0);
+  assert.ok(words.every((w, i) => i === 0 || w.t > words[i - 1]!.t));
+  assert.ok(words.at(-1)!.t < 4);
+  assert.deepEqual(words.filter((w) => w.highlight).map((w) => w.word), ['velours', 'noir.']);
+
+  const sb = minimal();
+  sb.scenes[1]!.layers.push({ type: 'component', ref: 'captions', start: 1, props: { text: 'Un masque… de *velours noir*. Fin.', duration: 4 } } as never);
+  const r = parseStoryboard(sb);
+  assert.ok(r.ok, JSON.stringify(!r.ok && r.errors));
+  if (!r.ok) return;
+  const group = r.storyboard.scenes[1]!.layers[0]!;
+  assert.equal(group.type, 'group');
+  if (group.type !== 'group') return;
+  assert.equal(group.layers.length, 3); // « Un masque… » · « de velours noir. » · « Fin. »
+  assert.ok(group.layers.every((l, i) => i === 0 || l.start > group.layers[i - 1]!.start));
+});
+
+test('composant stamp : valide, props inconnues signalées', () => {
+  const sb = minimal();
+  sb.scenes[1]!.layers.push({ type: 'component', ref: 'stamp', props: { text: 'Légende', color: '$accent', rotate: -12, taille: 3 } } as never);
+  const r = parseStoryboard(sb);
+  assert.ok(r.ok);
+  assert.ok(r.warnings.some((w) => w.path.endsWith('props.taille')));
+});

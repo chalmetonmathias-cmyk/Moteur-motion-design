@@ -1,0 +1,62 @@
+{
+  "episode": "11_masque-de-fer",
+  "duree": 65,
+  "segments": [
+    {
+      "id": "accroche",
+      "start": 0,
+      "end": 5.2,
+      "text": "Novembre 1703. Un prisonnier meurt à la Bastille. Personne n’a jamais vu *son visage*.",
+      "texte_voix": "Novembre 1703. Un prisonnier meurt à la Bastille. Personne n’a jamais vu son visage."
+    },
+    {
+      "id": "lettre",
+      "start": 5.2,
+      "end": 14.4,
+      "text": "Trente-quatre ans plus tôt, en juillet 1669, le ministre Louvois écrit à son geôlier : s’il parle d’autre chose que de ses besoins, *menacez-le de mort*.",
+      "texte_voix": "Trente-quatre ans plus tôt, en juillet 1669, le ministre Louvois écrit à son geôlier : s’il parle d’autre chose que de ses besoins, menacez-le de mort."
+    },
+    {
+      "id": "prisons",
+      "start": 14.4,
+      "end": 22,
+      "text": "Le nom inscrit dans les lettres : *Eustache Dauger*. Pignerol, Exilles, l’île Sainte-Marguerite, puis la Bastille. Toujours le même geôlier : Saint-Mars.",
+      "texte_voix": "Le nom inscrit dans les lettres : Eustache Dauger. Pignerol, Exilles, l’île Sainte-Marguerite, puis la Bastille. Toujours le même geôlier : Saint-Mars."
+    },
+    {
+      "id": "journal",
+      "start": 22,
+      "end": 29.4,
+      "text": "À la Bastille, un officier tient un journal. Il y décrit un prisonnier toujours masqué… d’un masque de *velours noir*.",
+      "texte_voix": "À la Bastille, un officier tient un journal. Il y décrit un prisonnier toujours masqué… d’un masque de velours noir."
+    },
+    {
+      "id": "legende",
+      "start": 29.4,
+      "end": 39.2,
+      "text": "Le *masque de fer* ? Il apparaît un demi-siècle plus tard, sous la plume de Voltaire. Puis Alexandre Dumas en fait le *frère jumeau* de Louis XIV.",
+      "texte_voix": "Le masque de fer ? Il apparaît un demi-siècle plus tard, sous la plume de Voltaire. Puis Alexandre Dumas en fait le frère jumeau de Louis XIV."
+    },
+    {
+      "id": "enterrement",
+      "start": 39.2,
+      "end": 45.4,
+      "text": "Le 20 novembre 1703, on l’enterre sous un faux nom : *Marchioly*. Même mort, il reste un secret.",
+      "texte_voix": "Le 20 novembre 1703, on l’enterre sous un faux nom : Marchioly. Même mort, il reste un secret."
+    },
+    {
+      "id": "identite",
+      "start": 45.4,
+      "end": 54.9,
+      "text": "Alors, qui était-il ? Pour la plupart des historiens, *un simple valet*, Eustache Dauger, qui en savait sans doute trop. Mais quoi ? Personne ne le sait.",
+      "texte_voix": "Alors, qui était-il ? Pour la plupart des historiens, un simple valet, Eustache Dauger, qui en savait sans doute trop. Mais quoi ? Personne ne le sait."
+    },
+    {
+      "id": "verdict",
+      "start": 54.9,
+      "end": 63.6,
+      "text": "Le prisonnier masqué : *prouvé*. Le masque de fer et le jumeau du roi : *légende*. Son identité : toujours *débattue*. Et toi, ton hypothèse ?",
+      "texte_voix": "Le prisonnier masqué : prouvé. Le masque de fer et le jumeau du roi : légende. Son identité : toujours débattue. Et toi, ton hypothèse ?"
+    }
+  ]
+}

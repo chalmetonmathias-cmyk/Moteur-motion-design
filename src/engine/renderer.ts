@@ -372,13 +372,15 @@ function drawText(ctx: CanvasRenderingContext2D, rl: RText, lt: number, opacity:
       if (us !== 1) ctx.scale(us, us);
       ctx.translate(-u.cx, -u.cy);
     }
+    // Contour d'abord, remplissage ensuite ("paint-order: stroke") : le contour
+    // n'empiète pas sur les lettres — indispensable pour des sous-titres lisibles.
     for (const run of u.runs) {
+      if (strokeStyle) ctx.strokeText(run.text, run.x, u.baseline);
       const style = run.highlight ? hlStyle : fillStyle;
       if (style) {
         ctx.fillStyle = style;
         ctx.fillText(run.text, run.x, u.baseline);
       }
-      if (strokeStyle) ctx.strokeText(run.text, run.x, u.baseline);
     }
     if (transformed) ctx.restore();
   }

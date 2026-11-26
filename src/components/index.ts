@@ -10,6 +10,8 @@ import type { ComponentDefinition } from './types.ts';
 import { titleCard } from './title-card.ts';
 import { lowerThird } from './lower-third.ts';
 import { logoReveal } from './logo-reveal.ts';
+import { captions } from './captions.ts';
+import { stamp } from './stamp.ts';
 
 export type { ComponentDefinition, ComponentContext, PropSpec, ResolvedProps } from './types.ts';
 
@@ -27,4 +29,4 @@ export function listComponents(): ComponentDefinition[] {
   return [...REGISTRY.values()];
 }
 
-for (const def of [titleCard, lowerThird, logoReveal]) registerComponent(def);
+for (const def of [titleCard, lowerThird, logoReveal, captions, stamp]) registerComponent(def);

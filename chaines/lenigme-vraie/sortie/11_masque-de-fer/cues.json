@@ -1,0 +1,77 @@
+{
+  "duree": 65,
+  "cues": [
+    {
+      "t": 5.2,
+      "type": "whoosh"
+    },
+    {
+      "t": 5.8,
+      "type": "tick-start"
+    },
+    {
+      "t": 11.600000000000001,
+      "type": "seal"
+    },
+    {
+      "t": 12.98,
+      "type": "stamp"
+    },
+    {
+      "t": 14,
+      "type": "tick-stop"
+    },
+    {
+      "t": 14.4,
+      "type": "whoosh"
+    },
+    {
+      "t": 22,
+      "type": "whoosh"
+    },
+    {
+      "t": 29.4,
+      "type": "whoosh"
+    },
+    {
+      "t": 38.099999999999994,
+      "type": "stamp"
+    },
+    {
+      "t": 39.2,
+      "type": "whoosh"
+    },
+    {
+      "t": 42.72,
+      "type": "stamp"
+    },
+    {
+      "t": 45.4,
+      "type": "whoosh"
+    },
+    {
+      "t": 53.4,
+      "type": "riser"
+    },
+    {
+      "t": 54.9,
+      "type": "whoosh"
+    },
+    {
+      "t": 56.25,
+      "type": "stamp"
+    },
+    {
+      "t": 58.92,
+      "type": "stamp"
+    },
+    {
+      "t": 61.11,
+      "type": "stamp"
+    },
+    {
+      "t": 63.6,
+      "type": "hit"
+    }
+  ]
+}

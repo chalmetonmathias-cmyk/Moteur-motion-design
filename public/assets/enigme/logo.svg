@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Logo "L'Énigme Vraie" (recréation : point d'interrogation doré, cercle doré, point rouge) -->
+  <defs>
+    <linearGradient id="or" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6dc98"/>
+      <stop offset="0.5" stop-color="#d8a84e"/>
+      <stop offset="1" stop-color="#a8762a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="246" fill="#0c0d12"/>
+  <circle cx="256" cy="256" r="226" fill="none" stroke="url(#or)" stroke-width="16"/>
+  <path d="M176 196 C176 140 214 108 262 108 C316 108 350 142 350 188 C350 232 322 252 294 270 C272 284 262 298 262 326 L262 344"
+        fill="none" stroke="url(#or)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="262" cy="404" r="30" fill="#d63a2f"/>
+</svg>

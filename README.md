@@ -5,7 +5,8 @@ Moteur de **motion design piloté par un fichier `storyboard.json`**, 100 % navi
 - **Preview temps réel** dans le navigateur (Canvas 2D, 60 fps).
 - **Export WebM** directement depuis le navigateur, **image par image, déterministe**, sans backend.
 - **Storyboard validé** avec des erreurs lisibles (chemin JSON exact + suggestion « vouliez-vous dire… »).
-- **Composants réutilisables** (`title-card`, `lower-third`, `logo-reveal`), **9 exemples** prêts à l'emploi.
+- **Composants réutilisables** (`title-card`, `lower-third`, `logo-reveal`, `captions`, `stamp`), **9 exemples** prêts à l'emploi.
+- **Rendu en ligne de commande** (`scripts/render.mjs`) pour les chaînes automatisées — première chaîne raccordée : [L'Énigme Vraie](chaines/lenigme-vraie/README.md).
 
 ![Aperçu du player](docs/preview.png)
 
@@ -48,6 +49,8 @@ Ouvrir http://localhost:5173 — l'exemple `short-01-hook` se lance automatiquem
 | `npm run typecheck` | `tsc` sur l'app **et** sur les tests/scripts |
 | `npm test` | Tests unitaires + vérification du cahier des charges des 9 exemples (`node --test`, zéro dépendance) |
 | `npm run examples` | Régénère `src/examples/*.json` depuis `scripts/examples/*.ts` et les valide |
+| `npm run render -- <storyboard.json> <sortie.webm> [--miniature 5 m.jpg]` | Rendu sans interface (Playwright requis) |
+| `npm run episode -- 11_masque-de-fer` | Génère les fichiers d'un épisode de L'Énigme Vraie |
 
 **Dépendances** : aucune dépendance d'exécution. En dev : `vite`, `typescript`, `@types/node` (types seuls, pour typer les tests). Pas de zod : la validation est un mini-validateur maison (voir §3) — plus petit, et surtout capable de messages en français contextualisés.
 
@@ -109,7 +112,8 @@ src/
   types/storyboard.ts types d'entrée (JSON) et modèle normalisé
   examples/           9 storyboards JSON
   main.ts · style.css
-scripts/              générateur des exemples (outil d'auteur, optionnel)
+scripts/              générateur des exemples, render.mjs (rendu en ligne de commande), verify-exports.cjs
+chaines/              chaînes TikTok raccordées au moteur (lenigme-vraie : épisodes, audio, production)
 tests/                tests node:test (parser, moteur, exporter, cahier des charges des exemples)
 public/assets/        SVG des exemples (logos, produit, avatars…)
 ```
@@ -387,6 +391,28 @@ Halo, double anneau dessiné en sens opposés, étincelles radiales, logo en res
 | `font`, `taglineFont`, `color` | police 1, police 2, `$text` | |
 | `accent`, `accent2`, `sparks` | `$accent`, `$primary`, 12 | |
 
+### `captions`
+
+Sous-titres mot à mot façon TikTok, calés sur une narration : le texte est découpé en morceaux de quelques mots, chaque mot apparaît à un instant proportionnel à sa longueur (pause après la ponctuation). La fonction `timeWords` (exportée) donne le même minutage pour caler voix et animations.
+
+| Prop | Défaut | |
+|---|---|---|
+| `text`, `duration` | **requis** | `*mot*` = surligné |
+| `wordsPerChunk` | 4 | mots affichés ensemble (coupure aussi en fin de phrase) |
+| `y`, `size`, `font`, `weight` | au-dessus de la safe-area basse, 62, police 2, 800 | |
+| `color`, `highlight`, `outline`, `maxWidth` | `$text`, `$accent`, noir 85 %, 900 | contour dessiné *sous* le texte |
+
+### `stamp`
+
+Tampon encreur qui s'écrase (back + petit tremblement) : verdicts, « SECRET », « CLASSÉ »…
+
+| Prop | Défaut | |
+|---|---|---|
+| `text` | **requis** | |
+| `sub` | — | petite ligne sous le texte |
+| `x`, `y`, `size`, `rotate`, `width` | centre, 96, −10°, estimée | |
+| `font`, `weight`, `color` | police 1, 700, `$accent` | |
+
 ### Créer un composant
 
 ```ts
@@ -471,9 +497,13 @@ Tous en **1080×1920, 60 fps**, safe-areas TikTok (220 px / 320 px), ≥ 2 compo
 
 ---
 
+## Chaînes raccordées
+
+`chaines/lenigme-vraie/` produit les épisodes de **L'Énigme Vraie** (histoires vraies, verdict prouvé / débattu / légende) : narration minutée → storyboard → rendu → musique originale → voix edge-tts calée sur les créneaux → MP4 1080p + version web < 10 Mo, rangés dans le dossier `BUSINESS TIKTOK`. Premier épisode : **n°11, l'Homme au masque de fer** (65 s). Voir [chaines/lenigme-vraie/README.md](chaines/lenigme-vraie/README.md).
+
 ## 9. Tests & qualité
 
-- `npm test` — 27 tests `node:test`, sans dépendance :
+- `npm test` — 29 tests `node:test`, sans dépendance :
   - parser : chemins JSON, suggestions, JSON invalide (ligne/colonne), tracés SVG invalides, palette/alpha ;
   - moteur : bornes et overshoot des easings, pistes éparses, timeline quantifiée, parsing SVG (arcs, relatifs), morphing ;
   - exporter : retiming (pré-roll, gigue, frame perdue) et injection de durée sur un WebM synthétique ;
